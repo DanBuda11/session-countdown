@@ -10,51 +10,52 @@ body {
   margin: 0;
   font-family: 'Roboto', sans-serif;
   color: #222;
+  padding: 1em;
 }
 
 .wrapper {
-  display: grid;
-  grid-template-rows: auto 1fr auto 1fr auto;
-  // align-items: center;
-  // justify-content: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
   min-height: 100vh;
 }
 
 header, .clock, .message, .calendar, footer {
-  place-self: center;
+  text-align: center;
 }
 
 header {
   margin: 1em;
+
+  img {
+    max-width: 100%;
+  }
 }
 
 .clock {
-  // align-self: center;
-  // justify-self: center;
-  // display: grid;
-  // grid-template-rows: auto 1fr auto;
+  padding-top: 2em;
+  // max-width: 90%;
+  text-align: center;
+
   .session-message {
     font-size: 20px;
+    margin: 0;
+    text-align: center;
   }
 
   .time, .time-labels {
-    // display: flex;
-    // flex-direction: row;
-    // max-width: 500px;
-    // margin: 0 auto;
     
     ul {
       display: flex;
-      // flex: auto;
-      justify-content: space-between;
-      // align-items: center;
+      justify-content: space-around;
       list-style: none;
       margin: 0;
       padding: 0;
+      // max-width: 90%;
     }
 
     ul li {
-      display: inline-block;
+      display: block;
     }
   }
 
@@ -73,4 +74,16 @@ header {
     ul li {
     }
   }
+}
+
+.message {
+  text-align: center;
+}
+
+.calendar {
+}
+
+footer {
+  padding: 1em;
+  text-align: center;
 }
