@@ -25,17 +25,20 @@ header, .clock, .message, .calendar, footer {
 }
 
 header {
-  margin: 1em;
+  // margin: 1em;
 
   img {
-    max-width: 100%;
+    max-width: 500px;
+    width: 90%;
+    border-radius: 35%;
   }
 }
 
 .clock {
-  padding-top: 2em;
+  // padding-top: 2em;
   // max-width: 90%;
   text-align: center;
+  margin: 0 auto;
 
   .session-message {
     font-size: 20px;

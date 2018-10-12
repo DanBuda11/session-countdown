@@ -74,7 +74,7 @@ function countdown() {
   if (duringSession === true) {
     sessionMessage.innerText = `Your life will begin anew in:`;
   } else {
-    sessionMessage.innerText = `Your life ends in:`;
+    sessionMessage.innerText = `YOUR LIFE ENDS IN:`;
   }
 
   time.innerHTML = `
