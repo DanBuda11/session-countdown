@@ -84,6 +84,20 @@ header {
 }
 
 .calendar {
+  display: none;
+  
+  .weekdays {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+  }
+
+  .weekday {
+
+  }
+}
+
+.calendar-mobile {
+
 }
 
 footer {
@@ -113,5 +127,15 @@ footer {
     .time {
       font-size: 60px;
     }
+  }
+}
+
+@media (min-width: 650px) {
+  .calendar {
+    display: block;
+  }
+
+  .calendar-mobile {
+    display: none;
   }
 }
