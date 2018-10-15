@@ -1,6 +1,10 @@
 const sessionMessage = document.querySelector('.session-message');
 const time = document.querySelector('.time');
 
+const calendar = document.querySelector('.calendar');
+const calendarTitle = document.querySelector('.calendar-title');
+const calendarGrid = document.querySelector('.calendar-grid');
+
 let sessionYear;
 let sineDieDate;
 let duringSession;
@@ -92,3 +96,64 @@ function countdown() {
 
 setInterval(countdown, 1000);
 countdown();
+
+// Start Calendar Code
+
+const months = [
+  'January',
+  'February',
+  'March',
+  'April',
+  'May',
+  'June',
+  'July',
+  'August',
+  'September',
+  'October',
+  'November',
+  'December',
+];
+
+const days = [
+  'Sunday',
+  'Monday',
+  'Tuesday',
+  'Wednesday',
+  'Thursday',
+  'Friday',
+  'Saturday',
+];
+// Show a list of important session dates, holidays on Patsty's calendar, and my birthday
+// Color code for holiday, session event
+// For mobile, definitely just a list of events, not an actual calendar
+// left/right arrows for changing the month shown
+
+// meybe an actual calendar-looking render for destktop size?
+
+// Need to populate days of the month (probably with dateFns)
+// Need to merge month dates with holidays and session days, given that they won't always
+// fall on the same date
+
+const calendarMonth = dateFns.getMonth(new Date());
+calendarTitle.textContent = `${months[calendarMonth]} ${currentYear}`;
+
+// How many days in the current month?
+const monthDays = dateFns.getDaysInMonth(new Date());
+console.log('month days: ', monthDays);
+
+// What's the first day of the month?
+const firstDay = dateFns.startOfMonth(new Date());
+console.log('start of month:', firstDay);
+
+// What day of the week is that first day?
+const dayOfWeek = days[dateFns.getDay(new Date(firstDay))];
+
+// Use firstDay to set where the calendar for that month starts in the calendar-view
+// version and fill in the grid wrapping until the last day of the month
+calendarGrid.innerHTML = `This month has ${monthDays} days and starts on a ${dayOfWeek}`;
+
+// Start message of the day code
+
+// Have specific messages for certain days (like my birthday) and probably set those
+// with if statements before rendering the message. And if there's no specific message for that day,
+// maybe just randomly choose form an array of options

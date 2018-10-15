@@ -63,7 +63,7 @@ header {
   }
 
   .time {
-    font-size: 60px;
+    font-size: 40px;
 
     ul li {
       font-family: 'Roboto Mono', sans-serif;
@@ -89,4 +89,29 @@ header {
 footer {
   padding: 1em;
   text-align: center;
+
+  p {
+    font-weight: bold;
+
+    a {
+      color: #444;
+      text-decoration: none;
+    }
+
+    a:visited {
+      color: #444;
+    }
+
+    a:hover {
+      color: #222;
+    }
+  }
+}
+
+@media (min-width: 430px) {
+  .clock {
+    .time {
+      font-size: 60px;
+    }
+  }
 }
