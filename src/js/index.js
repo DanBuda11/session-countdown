@@ -340,12 +340,45 @@ function renderMonth(change) {
       1};"><div class="day-date">${1}</div></div>`
   );
 
+  // For adding events, if any events in the already filtered array of events (where
+  // I filter only for those in the month being rendered), match the day I'm pushing
+  // to the array, add it into the "day-block" class after the "day-date" div.
+
+  // For test purposes only:
+  const fakeData = [
+    {
+      name: 'Febtober',
+      date: 9,
+      type: 'holiday',
+    },
+    {
+      name: 'Birthday!',
+      date: 14,
+      type: 'birthday',
+    },
+    {
+      name: 'Bill Filing',
+      date: 12,
+      type: 'legislative',
+    },
+  ];
+
   for (var i = 2; i < monthDays + 1; i++) {
     // console.log('hey!', i);
 
     calendarInfo.push(
-      `<div class="day-block"><div class="day-date">${i}</div></div>`
+      `<div class="day-block"><div class="day-date">${i}</div>`
     );
+
+    fakeData.forEach(item => {
+      if (item.date === i) {
+        calendarInfo.push(`
+            <div class="calendar-item ${item.type}">${item.name}</div>
+          `);
+      }
+    });
+
+    calendarInfo.push(`</div>`);
   }
 
   // Use firstDay to set where the calendar for that month starts in the calendar-view
