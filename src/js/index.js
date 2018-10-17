@@ -195,6 +195,13 @@ const data = [
     month: 2,
     date: 60, // 60th day of session
   },
+  {
+    name: "New Year's Day",
+    type: 'holiday',
+    dateType: 'static',
+    month: 0,
+    date: 1,
+  },
 ];
 
 function filterData(data) {
@@ -337,8 +344,20 @@ function renderMonth(change) {
   // in grid
   calendarInfo.push(
     `<div class="day-block day-one" style="grid-column-start: ${firstDayNum +
-      1};"><div class="day-date">${1}</div></div>`
+      1};"><div class="day-date">${1}</div>`
   );
+
+  // This will need to be rename to something other than "data" because I'll be using a
+  // filtered array and not the general data set.
+  data.forEach(item => {
+    if (item.date === 1) {
+      calendarInfo.push(
+        `<div class="calendar-item ${item.type}">${item.name}</div>`
+      );
+    }
+  });
+
+  calendarInfo.push(`</div>`);
 
   // For adding events, if any events in the already filtered array of events (where
   // I filter only for those in the month being rendered), match the day I'm pushing
