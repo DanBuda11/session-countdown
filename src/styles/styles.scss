@@ -86,9 +86,33 @@ header {
 .calendar {
   display: none;
   
+  .buttons {
+    display: flex;
+    justify-content: space-around;
+    max-width: 350px;
+    margin: 1em auto;
+
+    button {
+      width: 75px;
+      border-radius: 5px;
+      border: none;
+      background-color: #021128;
+      color: white;
+      outline: none;
+    }
+
+    .calendar-title {
+      margin: 0;
+      align-self: center;
+      font-weight: bold;
+      width: 175px;
+    }
+  }
+
   .weekdays {
     display: grid;
     grid-template-columns: repeat(7, 1fr);
+    padding-bottom: 10px;
   }
 
   .weekday {
@@ -98,11 +122,16 @@ header {
   .calendar-grid {
     display: grid;
     grid-template-columns: repeat(7, 1fr);
-    
+
     .day-block {
+      border: 1px solid #222;
+      margin-left: -1px;
+      margin-bottom: -1px;
+      min-height: 60px;
 
       .day-date {
-
+        text-align: right;
+        padding: 5px;
       }
     }
   }

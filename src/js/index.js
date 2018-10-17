@@ -323,6 +323,8 @@ function renderMonth(change) {
   const firstDay = dateFns.startOfMonth(new Date(currentYear, currentMonth));
   console.log('firstDay: ', firstDay);
 
+  const firstDayNum = dateFns.getDay(firstDay);
+  console.log('firstDayNum: ', firstDayNum);
   // // What day of the week is that first day? (Do I need to know this or just the day's
   // Javascript number? Eg: 4 for Thursday)
   const dayOfWeek = days[dateFns.getDay(new Date(firstDay))];
@@ -331,8 +333,16 @@ function renderMonth(change) {
   // Render the calendar into the calendar grid (dont' worry about the mobile version for now)
   let calendarInfo = [];
 
-  for (var i = 1; i < monthDays + 1; i++) {
-    console.log('hey!', i);
+  // Push 1st calendar block into array with class to denote is as first for starting position
+  // in grid
+  calendarInfo.push(
+    `<div class="day-block day-one" style="grid-column-start: ${firstDayNum +
+      1};"><div class="day-date">${1}</div></div>`
+  );
+
+  for (var i = 2; i < monthDays + 1; i++) {
+    // console.log('hey!', i);
+
     calendarInfo.push(
       `<div class="day-block"><div class="day-date">${i}</div></div>`
     );
