@@ -94,6 +94,18 @@ header {
   .weekday {
 
   }
+
+  .calendar-grid {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    
+    .day-block {
+
+      .day-date {
+
+      }
+    }
+  }
 }
 
 .calendar-mobile {

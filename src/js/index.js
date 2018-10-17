@@ -109,6 +109,11 @@ function countdown() {
 `;
 }
 
+// What happens when everything is at 0? Need to stop it running? Or someone automatically
+// switch it over to until sine die? I think it might already do this
+
+// Need to be able to test what happens when everything hits 0
+
 setInterval(countdown, 1000);
 countdown();
 // ************************************************************
@@ -318,13 +323,25 @@ function renderMonth(change) {
   const firstDay = dateFns.startOfMonth(new Date(currentYear, currentMonth));
   console.log('firstDay: ', firstDay);
 
-  // // What day of the week is that first day?
+  // // What day of the week is that first day? (Do I need to know this or just the day's
+  // Javascript number? Eg: 4 for Thursday)
   const dayOfWeek = days[dateFns.getDay(new Date(firstDay))];
   console.log('dayOfWeek: ', dayOfWeek);
 
+  // Render the calendar into the calendar grid (dont' worry about the mobile version for now)
+  let calendarInfo = [];
+
+  for (var i = 1; i < monthDays + 1; i++) {
+    console.log('hey!', i);
+    calendarInfo.push(
+      `<div class="day-block"><div class="day-date">${i}</div></div>`
+    );
+  }
+
   // Use firstDay to set where the calendar for that month starts in the calendar-view
   // version and fill in the grid wrapping until the last day of the month
-  calendarGrid.innerHTML = `This month has ${monthDays} days and starts on a ${dayOfWeek}`;
+  // calendarGrid.innerHTML = `This month has ${monthDays} days and starts on a ${dayOfWeek}`;
+  calendarGrid.innerHTML = calendarInfo.join('');
 
   // Pull out only the holidays that are in the current month
   // Transform holiday dates that are flex or session into static and put those and
