@@ -182,6 +182,16 @@ const data = [
     },
   },
   {
+    name: 'Saturday Holiday',
+    type: 'holiday',
+    dateType: 'flex',
+    month: 9,
+    date: {
+      nth: 2,
+      weekday: 6,
+    },
+  },
+  {
     name: "Dan Buda's Birthday",
     type: 'birthday',
     dateType: 'static',
@@ -222,7 +232,7 @@ function filterData(data) {
         getSessionDate(sessionStartDate, item.date - 1);
       }
     });
-  console.log('filteredData: ', filteredData);
+  // console.log('filteredData: ', filteredData);
 }
 
 // Each of the 3 "get" functions will probably only run after an if statement determining
@@ -235,7 +245,7 @@ function getStaticDate(month, date) {}
 function getFlexDate(month, nth, day) {}
 
 function getSessionDate(start, days) {
-  console.log(dateFns.addDays(start, days));
+  // console.log(dateFns.addDays(start, days));
 }
 
 filterData(data);
@@ -317,28 +327,101 @@ function renderMonth(change) {
     }
   }
   // Console.log the month and year to be used in the calculations to follow
-  console.log(currentMonth, currentYear);
+  // console.log(currentMonth, currentYear);
 
   // show current month & year in calendar title
   calendarTitle.textContent = `${months[currentMonth]} ${currentYear}`;
 
   // How many days in the current month?
   const monthDays = dateFns.getDaysInMonth(new Date(currentYear, currentMonth));
-  console.log('monthDays: ', monthDays);
+  // console.log('monthDays: ', monthDays);
 
   // // What's the first day of the month?
   const firstDay = dateFns.startOfMonth(new Date(currentYear, currentMonth));
-  console.log('firstDay: ', firstDay);
+  // console.log('firstDay: ', firstDay);
 
   const firstDayNum = dateFns.getDay(firstDay);
-  console.log('firstDayNum: ', firstDayNum);
+  // console.log('firstDayNum: ', firstDayNum);
   // // What day of the week is that first day? (Do I need to know this or just the day's
   // Javascript number? Eg: 4 for Thursday)
   const dayOfWeek = days[dateFns.getDay(new Date(firstDay))];
-  console.log('dayOfWeek: ', dayOfWeek);
+  // console.log('dayOfWeek: ', dayOfWeek);
 
   // Render the calendar into the calendar grid (dont' worry about the mobile version for now)
   let calendarInfo = [];
+
+  // *********************************************
+  // Put all code filtering the date into the final dataset to be rendered to the calendar here
+
+  // So you have the original dataset, "data"
+
+  // You need to pull out all events for the month being used
+
+  // You need to run all those dates thru one of the 3 functions (or maybe just 2) to put
+  // them in the correct format to run thru the calendarInfo.push stuff
+  //
+
+  const thisMonthData = data.filter(item => item.month === currentMonth);
+  // console.log('thisMonthData: ', thisMonthData);
+
+  const finalData = thisMonthData.map(date => {
+    let newDate;
+
+    if (date.dateType === 'session') {
+      // Figure out the new date based on days after session starts
+      newDate = sessionStartDate + date.date;
+      console.log('session newDate: ', newDate);
+    } else if (date.dateType === 'flex') {
+      // Figure out for flex date
+      // start by asking if the item's date.weekday is the first day of the month
+      // if so, start the next calculation
+      // if not, keep adding 1 until they match up
+
+      let dayCalc = date.date.weekday;
+      console.log('first dayCalc: ', dayCalc);
+      console.log('firstDayNum: ', firstDayNum);
+      let counter = 0;
+      console.log('first counter: ', counter);
+      while (dayCalc !== firstDayNum) {
+        counter = ++counter;
+        console.log('flex counter: ', counter);
+        if (dayCalc === 0) {
+          dayCalc = 6;
+          console.log('flex dayCalc: ', dayCalc);
+        } else {
+          dayCalc = --dayCalc;
+          console.log('flex dayCalc: ', dayCalc);
+        }
+      }
+      // after matching up weekday days, next calc here
+      newDate = 1 + (date.date.nth - 1) * 7 + counter;
+      console.log('flex newDate: ', newDate);
+    } else {
+      newDate = date.date;
+      console.log('static/birthday newDate: ', newDate);
+    }
+
+    return {
+      name: date.name,
+      type: date.type,
+      date: newDate,
+    };
+  });
+
+  console.log('finalData: ', finalData);
+
+  // {
+  //   name: 'Martin Luther King, Jr. Day',
+  //   type: 'holiday',
+  //   dateType: 'flex',
+  //   month: 0,
+  //   date: {
+  //     nth: 3, // 3rd
+  //     weekday: 1, // Monday
+  //   },
+  // },
+
+  // *********************************************
 
   // Push 1st calendar block into array with class to denote is as first for starting position
   // in grid
@@ -349,7 +432,7 @@ function renderMonth(change) {
 
   // This will need to be rename to something other than "data" because I'll be using a
   // filtered array and not the general data set.
-  data.forEach(item => {
+  finalData.forEach(item => {
     if (item.date === 1) {
       calendarInfo.push(
         `<div class="calendar-item ${item.type}">${item.name}</div>`
@@ -389,7 +472,8 @@ function renderMonth(change) {
       `<div class="day-block"><div class="day-date">${i}</div>`
     );
 
-    fakeData.forEach(item => {
+    finalData.forEach(item => {
+      console.log('item.date: ', item.date);
       if (item.date === i) {
         calendarInfo.push(`
             <div class="calendar-item ${item.type}">${item.name}</div>
