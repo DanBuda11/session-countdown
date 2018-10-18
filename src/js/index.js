@@ -195,7 +195,7 @@ const data = [
     name: "Dan Buda's Birthday",
     type: 'birthday',
     dateType: 'static',
-    month: 3,
+    month: 2,
     date: 14,
   },
   {
@@ -211,6 +211,13 @@ const data = [
     dateType: 'static',
     month: 0,
     date: 1,
+  },
+  {
+    name: 'Sine Die',
+    type: 'legislative',
+    dateType: 'session',
+    month: 4, // Not always in May!,
+    date: 140,
   },
 ];
 
@@ -369,7 +376,12 @@ function renderMonth(change) {
 
     if (date.dateType === 'session') {
       // Figure out the new date based on days after session starts
-      newDate = sessionStartDate + date.date;
+      const setDate = dateFns.addDays(
+        new Date(sessionStartDate),
+        date.date - 1
+      );
+      console.log('setDate: ', setDate);
+      newDate = dateFns.getDate(new Date(setDate));
       console.log('session newDate: ', newDate);
     } else if (date.dateType === 'flex') {
       // Figure out for flex date
@@ -447,23 +459,23 @@ function renderMonth(change) {
   // to the array, add it into the "day-block" class after the "day-date" div.
 
   // For test purposes only:
-  const fakeData = [
-    {
-      name: 'Febtober',
-      date: 9,
-      type: 'holiday',
-    },
-    {
-      name: 'Birthday!',
-      date: 14,
-      type: 'birthday',
-    },
-    {
-      name: 'Bill Filing',
-      date: 12,
-      type: 'legislative',
-    },
-  ];
+  // const fakeData = [
+  //   {
+  //     name: 'Febtober',
+  //     date: 9,
+  //     type: 'holiday',
+  //   },
+  //   {
+  //     name: 'Birthday!',
+  //     date: 14,
+  //     type: 'birthday',
+  //   },
+  //   {
+  //     name: 'Bill Filing',
+  //     date: 12,
+  //     type: 'legislative',
+  //   },
+  // ];
 
   for (var i = 2; i < monthDays + 1; i++) {
     // console.log('hey!', i);
