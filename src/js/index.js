@@ -6,6 +6,7 @@ const calendarTitle = document.querySelector('.calendar-title');
 const calendarGrid = document.querySelector('.calendar-grid');
 const backButton = document.querySelector('.left');
 const forwardButton = document.querySelector('.right');
+const calendarMobile = document.querySelector('.calendar-mobile');
 
 // Add event listeners to back/forward month buttons
 backButton.addEventListener('click', () => {
@@ -356,6 +357,7 @@ function renderMonth(change) {
 
   // Render the calendar into the calendar grid (dont' worry about the mobile version for now)
   let calendarInfo = [];
+  let calendarInfoMobile = [];
 
   // *********************************************
   // Put all code filtering the date into the final dataset to be rendered to the calendar here
@@ -380,9 +382,9 @@ function renderMonth(change) {
         new Date(sessionStartDate),
         date.date - 1
       );
-      console.log('setDate: ', setDate);
+      // console.log('setDate: ', setDate);
       newDate = dateFns.getDate(new Date(setDate));
-      console.log('session newDate: ', newDate);
+      // console.log('session newDate: ', newDate);
     } else if (date.dateType === 'flex') {
       // Figure out for flex date
       // start by asking if the item's date.weekday is the first day of the month
@@ -390,27 +392,27 @@ function renderMonth(change) {
       // if not, keep adding 1 until they match up
 
       let dayCalc = date.date.weekday;
-      console.log('first dayCalc: ', dayCalc);
-      console.log('firstDayNum: ', firstDayNum);
+      // console.log('first dayCalc: ', dayCalc);
+      // console.log('firstDayNum: ', firstDayNum);
       let counter = 0;
-      console.log('first counter: ', counter);
+      // console.log('first counter: ', counter);
       while (dayCalc !== firstDayNum) {
         counter = ++counter;
-        console.log('flex counter: ', counter);
+        // console.log('flex counter: ', counter);
         if (dayCalc === 0) {
           dayCalc = 6;
-          console.log('flex dayCalc: ', dayCalc);
+          // console.log('flex dayCalc: ', dayCalc);
         } else {
           dayCalc = --dayCalc;
-          console.log('flex dayCalc: ', dayCalc);
+          // console.log('flex dayCalc: ', dayCalc);
         }
       }
       // after matching up weekday days, next calc here
       newDate = 1 + (date.date.nth - 1) * 7 + counter;
-      console.log('flex newDate: ', newDate);
+      // console.log('flex newDate: ', newDate);
     } else {
       newDate = date.date;
-      console.log('static/birthday newDate: ', newDate);
+      // console.log('static/birthday newDate: ', newDate);
     }
 
     return {
@@ -420,7 +422,7 @@ function renderMonth(change) {
     };
   });
 
-  console.log('finalData: ', finalData);
+  // console.log('finalData: ', finalData);
 
   // {
   //   name: 'Martin Luther King, Jr. Day',
@@ -442,12 +444,15 @@ function renderMonth(change) {
       1};"><div class="day-date">${1}</div>`
   );
 
-  // This will need to be rename to something other than "data" because I'll be using a
-  // filtered array and not the general data set.
   finalData.forEach(item => {
     if (item.date === 1) {
       calendarInfo.push(
         `<div class="calendar-item ${item.type}">${item.name}</div>`
+      );
+      calendarInfoMobile.push(
+        `<div class="calendar__item--mobile ${item.type}">${item.date} ${
+          item.name
+        }</div>`
       );
     }
   });
@@ -485,11 +490,16 @@ function renderMonth(change) {
     );
 
     finalData.forEach(item => {
-      console.log('item.date: ', item.date);
+      // console.log('item.date: ', item.date);
       if (item.date === i) {
         calendarInfo.push(`
             <div class="calendar-item ${item.type}">${item.name}</div>
           `);
+        calendarInfoMobile.push(
+          `<div class="calendar__item--mobile ${item.type}">${item.date} ${
+            item.name
+          }</div>`
+        );
       }
     });
 
@@ -500,6 +510,7 @@ function renderMonth(change) {
   // version and fill in the grid wrapping until the last day of the month
   // calendarGrid.innerHTML = `This month has ${monthDays} days and starts on a ${dayOfWeek}`;
   calendarGrid.innerHTML = calendarInfo.join('');
+  calendarMobile.innerHTML = calendarInfoMobile.join('');
 
   // Pull out only the holidays that are in the current month
   // Transform holiday dates that are flex or session into static and put those and
