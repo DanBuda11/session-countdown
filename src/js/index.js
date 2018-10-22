@@ -50,7 +50,7 @@ while (!dateFns.isTuesday(sessionStartDate)) {
 sessionStartDate = dateFns.addDays(sessionStartDate, 7);
 
 // So when is Sine Die?
-sineDieDate = dateFns.addDays(sessionStartDate, 140);
+sineDieDate = dateFns.addDays(sessionStartDate, 139);
 
 // Next, figure out if we are during session and need to calculate time until Sine Die,
 // or before session and need to calculate time until session starts
@@ -173,6 +173,20 @@ const data = [
     date: 25, // I don't need the month because it's in a separate key above
   },
   {
+    name: 'Day After Christmas',
+    type: 'holiday',
+    dateType: 'static',
+    month: 11,
+    date: 26,
+  },
+  {
+    name: 'Christmas Eve Day',
+    type: 'holiday',
+    dateType: 'static',
+    month: 11,
+    date: 24,
+  },
+  {
     name: 'Martin Luther King, Jr. Day',
     type: 'holiday',
     dateType: 'flex',
@@ -183,13 +197,13 @@ const data = [
     },
   },
   {
-    name: 'Saturday Holiday',
+    name: 'Labor Day',
     type: 'holiday',
     dateType: 'flex',
-    month: 9,
+    month: 8,
     date: {
-      nth: 2,
-      weekday: 6,
+      nth: 1,
+      weekday: 1,
     },
   },
   {
@@ -220,58 +234,93 @@ const data = [
     month: 4, // Not always in May!,
     date: 140,
   },
+  {
+    name: 'Veterans Day',
+    type: 'holiday',
+    dateType: 'static',
+    month: 10,
+    date: 11,
+  },
+  {
+    name: 'Thanksgiving Day',
+    type: 'holiday',
+    dateType: 'flex',
+    month: 10,
+    date: {
+      nth: 4,
+      weekday: 4,
+    },
+  },
+  {
+    name: 'Day After Thanksgiving',
+    type: 'holiday',
+    dateType: 'flex',
+    month: 10,
+    date: {
+      nth: 4,
+      weekday: 5,
+    },
+  },
+  {
+    name: 'Confederate Heroes Day',
+    type: 'holiday',
+    dateType: 'static',
+    month: 0,
+    date: 19,
+  },
+  {
+    name: "Presidents' Day",
+    type: 'holiday',
+    dateType: 'flex',
+    month: 1,
+    date: {
+      nth: 3,
+      weekday: 1,
+    },
+  },
+  {
+    name: 'Texas Independence Day',
+    type: 'holiday',
+    dateType: 'static',
+    month: 2,
+    date: 2,
+  },
+  {
+    name: 'Cesar Chavez Day',
+    type: 'holiday',
+    dateType: 'static',
+    month: 2,
+    date: 31,
+  },
+  {
+    name: 'San Jacinto Day',
+    type: 'holiday',
+    dateType: 'static',
+    month: 3,
+    date: 21,
+  },
+  {
+    name: 'Emancipation Day',
+    type: 'holiday',
+    dateType: 'static',
+    month: 5,
+    date: 19,
+  },
+  {
+    name: 'Independence Day',
+    type: 'holiday',
+    dateType: 'static',
+    month: 6,
+    date: 4,
+  },
+  {
+    name: 'LBJ Day',
+    type: 'holiday',
+    dateType: 'static',
+    month: 7,
+    date: 27,
+  },
 ];
-
-function filterData(data) {
-  const thisMonth = dateFns.getMonth(new Date());
-
-  const filteredData = data
-    .filter(date => date.month === 2)
-    // Which date type are we lookg at when we loop over the eventual filtered array with
-    // only dates from the current month?
-
-    // This isn't going to work because it's not returning anything
-    .map(item => {
-      if (item.dateType === 'static') {
-        getStaticDate(item.month, item.date);
-      } else if (item.dateType === 'flex') {
-        getFlexDate(item.month, item.date.nth, item.date.weekday);
-      } else if (item.dateType === 'session') {
-        getSessionDate(sessionStartDate, item.date - 1);
-      }
-    });
-  // console.log('filteredData: ', filteredData);
-}
-
-// Each of the 3 "get" functions will probably only run after an if statement determining
-// which type of date the current item is. So first we'd check to see if it's a "session"
-// type then we'd run it thru the getSessionDate function, so we will already know which
-// array item we're working with
-
-function getStaticDate(month, date) {}
-
-function getFlexDate(month, nth, day) {}
-
-function getSessionDate(start, days) {
-  // console.log(dateFns.addDays(start, days));
-}
-
-filterData(data);
-
-// getSessionDate(sessionStartDate, 60 - 1); // this will probably look like (sessionStartDate, date - 1)
-
-// What needs to happen in the filterData() function above is to choose only the dates in
-// the data array that are in the current month (or the month that was clicked to by
-// forward or back arrow). Once all those dates are pulled out, I need the actual date
-// of the holiday/etc so that will come from one of the functions depending on the dateType
-// then once I have the date (I only need the day of the month at this point), I can use that
-// along with the name of the holiday/etc, and the item's type (to give it class and style
-// it in the DOM) to render to the screen
-// The end goal at least initially should be to take all the "holidays" in the entire
-// dataset, keep only the ones for the currently rendered month, run functions to change
-// "flex" and "session" dates into actual static dates, then combine these with the "static"
-// dates into a new array for all of the "holidays" in the current month. Then use that
-// data to map over & render everytyhing to the calendar grid.
 
 // So maybe the overall function is:
 function renderMonth(change) {
@@ -300,29 +349,17 @@ function renderMonth(change) {
     // the holidays to render based on the button that was clicked (forward or backward a month)
     // If forward button clicked
     if (change === 1) {
-      // console.log('forward clicked');
       // If month will change from Dec to Jan because of click
       if (currentMonth === 11) {
         // Set values of currentMonth and currentYear to January of next year
         currentMonth = 0;
         ++currentYear;
-        // console.log(
-        //   'inside change to January function: ',
-        //   currentMonth,
-        //   currentYear
-        // );
       } else {
         // Increase month by 1 if year didn't change
         ++currentMonth;
-        // console.log(
-        //   'inside non-year change function: ',
-        //   currentMonth,
-        //   currentYear
-        // );
       }
       // If backward button clicked
     } else if (change === -1) {
-      // console.log('backward clicked');
       // If month will change from Jan to Dec because of click
       if (currentMonth === 0) {
         // Set values of currentMonth and currentYear to Dec of previous year
@@ -334,26 +371,18 @@ function renderMonth(change) {
       }
     }
   }
-  // Console.log the month and year to be used in the calculations to follow
-  // console.log(currentMonth, currentYear);
 
   // show current month & year in calendar title
   calendarTitle.textContent = `${months[currentMonth]} ${currentYear}`;
 
   // How many days in the current month?
   const monthDays = dateFns.getDaysInMonth(new Date(currentYear, currentMonth));
-  // console.log('monthDays: ', monthDays);
 
   // // What's the first day of the month?
   const firstDay = dateFns.startOfMonth(new Date(currentYear, currentMonth));
-  // console.log('firstDay: ', firstDay);
 
   const firstDayNum = dateFns.getDay(firstDay);
-  // console.log('firstDayNum: ', firstDayNum);
-  // // What day of the week is that first day? (Do I need to know this or just the day's
-  // Javascript number? Eg: 4 for Thursday)
-  const dayOfWeek = days[dateFns.getDay(new Date(firstDay))];
-  // console.log('dayOfWeek: ', dayOfWeek);
+  // const dayOfWeek = days[dateFns.getDay(new Date(firstDay))];
 
   // Render the calendar into the calendar grid (dont' worry about the mobile version for now)
   let calendarInfo = [];
@@ -362,16 +391,7 @@ function renderMonth(change) {
   // *********************************************
   // Put all code filtering the date into the final dataset to be rendered to the calendar here
 
-  // So you have the original dataset, "data"
-
-  // You need to pull out all events for the month being used
-
-  // You need to run all those dates thru one of the 3 functions (or maybe just 2) to put
-  // them in the correct format to run thru the calendarInfo.push stuff
-  //
-
   const thisMonthData = data.filter(item => item.month === currentMonth);
-  // console.log('thisMonthData: ', thisMonthData);
 
   const finalData = thisMonthData.map(date => {
     let newDate;
@@ -382,9 +402,7 @@ function renderMonth(change) {
         new Date(sessionStartDate),
         date.date - 1
       );
-      // console.log('setDate: ', setDate);
       newDate = dateFns.getDate(new Date(setDate));
-      // console.log('session newDate: ', newDate);
     } else if (date.dateType === 'flex') {
       // Figure out for flex date
       // start by asking if the item's date.weekday is the first day of the month
@@ -392,27 +410,20 @@ function renderMonth(change) {
       // if not, keep adding 1 until they match up
 
       let dayCalc = date.date.weekday;
-      // console.log('first dayCalc: ', dayCalc);
-      // console.log('firstDayNum: ', firstDayNum);
+
       let counter = 0;
-      // console.log('first counter: ', counter);
       while (dayCalc !== firstDayNum) {
         counter = ++counter;
-        // console.log('flex counter: ', counter);
         if (dayCalc === 0) {
           dayCalc = 6;
-          // console.log('flex dayCalc: ', dayCalc);
         } else {
           dayCalc = --dayCalc;
-          // console.log('flex dayCalc: ', dayCalc);
         }
       }
       // after matching up weekday days, next calc here
       newDate = 1 + (date.date.nth - 1) * 7 + counter;
-      // console.log('flex newDate: ', newDate);
     } else {
       newDate = date.date;
-      // console.log('static/birthday newDate: ', newDate);
     }
 
     return {
@@ -421,19 +432,6 @@ function renderMonth(change) {
       date: newDate,
     };
   });
-
-  // console.log('finalData: ', finalData);
-
-  // {
-  //   name: 'Martin Luther King, Jr. Day',
-  //   type: 'holiday',
-  //   dateType: 'flex',
-  //   month: 0,
-  //   date: {
-  //     nth: 3, // 3rd
-  //     weekday: 1, // Monday
-  //   },
-  // },
 
   // *********************************************
 
@@ -463,34 +461,12 @@ function renderMonth(change) {
   // I filter only for those in the month being rendered), match the day I'm pushing
   // to the array, add it into the "day-block" class after the "day-date" div.
 
-  // For test purposes only:
-  // const fakeData = [
-  //   {
-  //     name: 'Febtober',
-  //     date: 9,
-  //     type: 'holiday',
-  //   },
-  //   {
-  //     name: 'Birthday!',
-  //     date: 14,
-  //     type: 'birthday',
-  //   },
-  //   {
-  //     name: 'Bill Filing',
-  //     date: 12,
-  //     type: 'legislative',
-  //   },
-  // ];
-
   for (var i = 2; i < monthDays + 1; i++) {
-    // console.log('hey!', i);
-
     calendarInfo.push(
       `<div class="day-block"><div class="day-date">${i}</div>`
     );
 
     finalData.forEach(item => {
-      // console.log('item.date: ', item.date);
       if (item.date === i) {
         calendarInfo.push(`
             <div class="calendar-item ${item.type}">${item.name}</div>
@@ -508,17 +484,8 @@ function renderMonth(change) {
 
   // Use firstDay to set where the calendar for that month starts in the calendar-view
   // version and fill in the grid wrapping until the last day of the month
-  // calendarGrid.innerHTML = `This month has ${monthDays} days and starts on a ${dayOfWeek}`;
   calendarGrid.innerHTML = calendarInfo.join('');
   calendarMobile.innerHTML = calendarInfoMobile.join('');
-
-  // Pull out only the holidays that are in the current month
-  // Transform holiday dates that are flex or session into static and put those and
-  // any existing static dates into a final array of all info needed to render holidays
-  // to calendar using the new static-only date info for holidays
-  // Info needed to render includes holiday name, type, & date
-  // name and date for obvious reasons, type to determine styling if it's a holiday,
-  // birthday, or legislative date
 }
 
 // Then that function gets called on page load and when someone wants to go
