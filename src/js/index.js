@@ -306,18 +306,136 @@ const data = [
     month: 7,
     date: 27,
   },
+  {
+    name: '1st day a senator may place 5 bills on the Intent Calendar',
+    type: 'legislative',
+    dateType: 'static',
+    month: 3,
+    date: 15,
+  },
 ];
 
 const sessionData = [
   {
     name: 'Bill Filing Deadline',
-    dateType: 'session',
     sessionDay: 60, // 60th day of session
   },
   {
     name: 'Sine Die',
-    dateType: 'session',
     sessionDay: 140,
+  },
+  {
+    name: 'Legislature convenes',
+    sessionDay: 1,
+  },
+  {
+    name: 'Last day for house committees to report house bills and house JRs',
+    sessionDay: 119,
+  },
+  {
+    name:
+      'Deadline for the house to distribute its last House Daily Calendar with house bills and house JRs',
+    sessionDay: 120,
+  },
+  {
+    name:
+      'Deadline for the house to distribute its last House Local & Consent Calendar with consent house bills',
+    sessionDay: 121,
+  },
+  {
+    name:
+      'Last day for the house to consider house bills and house JRs on 2nd reading on Daily or Supplemental Calendar',
+    sessionDay: 122,
+  },
+  {
+    name:
+      'Last day for the house to consider consent house bills on 2nd and 3rd reading and all 3rd reading house bills or house JRs on the Supplemental Calendar',
+    sessionDay: 123,
+  },
+  {
+    name:
+      'Deadline for house to distribute its last House Local & Consent Calendar with local house bills',
+    sessionDay: 128,
+  },
+  {
+    name:
+      'Last day for the house to consider local house bills on 2nd and 3rd reading',
+    sessionDay: 130,
+  },
+  {
+    name:
+      'First day teh senate can consider bills and resolutions on the 1st day they are place on the Intent Calendar',
+    sessionDay: 130,
+  },
+  {
+    name: 'Last day for house comittees to report senate bills and JRs',
+    sessionDay: 131,
+  },
+  {
+    name:
+      'Deadline for the house to distribute its last House Daily Calendar with senate bills and senate JRs',
+    sessionDay: 132,
+  },
+  {
+    name:
+      'Deadline for the house to distribute its last House Local & Consent Calendar with senate bills',
+    sessionDay: 133,
+  },
+  {
+    name:
+      'Last day for the house to consider 2nd reading senate bills and senate JRs on the Daily or Supplemental Calendar',
+    sessionDay: 134,
+  },
+  {
+    name:
+      'Last day for the house to consider local and consent senate bills on 2nd and 3rd reading and all 3rd reading senate bills and JRs on the Supplemental Calendar',
+    sessionDay: 135,
+  },
+  {
+    name:
+      'Last day for senate to consider all bills and JRs on 2nd or 3rd reading',
+    sessionDay: 135,
+  },
+  {
+    name: 'Deadline for the house to distribute senate amendments',
+    sessionDay: 136,
+  },
+  {
+    name:
+      'Last day for the house to act on senate amendments (concur or request a conference committee)',
+    sessionDay: 137,
+  },
+  {
+    name:
+      'Deadline for the senate to print and distribute senate copies of CCRs on tax, general appropriations, reapportionment bills',
+    sessionDay: 137,
+  },
+  {
+    name: 'Deadline for the house to distribute house copies of all CCRs',
+    sessionDay: 138,
+  },
+  {
+    name:
+      'Deadline for the senate to print and distribute senate copies of all CCRs on bills other than tax, general appropriations, reapportionment bills and all house amendments to senate bills and JRs that did not go to a CCR',
+    sessionDay: 138,
+  },
+  {
+    name:
+      'Last day for the house to adopt CCRs or discharge house conferees and concur in senate amendments',
+    sessionDay: 139,
+  },
+  {
+    name: 'Last day for the senate to concur in house amendments or adopt CCRs',
+    sessionDay: 139,
+  },
+  {
+    name:
+      'Last day the governor can sign or veto bills passed during regular session',
+    sessionDay: 160,
+  },
+  {
+    name: 'Date that bills without specific effective dates become law',
+    sessionDay: 231,
   },
 ];
 
