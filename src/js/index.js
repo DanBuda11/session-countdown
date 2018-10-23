@@ -321,7 +321,8 @@ const sessionData = [
     sessionDay: 60, // 60th day of session
   },
   {
-    name: 'Sine Die',
+    name:
+      'Last day of regular session (sine die); only corrections may be considered in the house and senate',
     sessionDay: 140,
   },
   {
