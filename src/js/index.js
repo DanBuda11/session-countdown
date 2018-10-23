@@ -163,7 +163,7 @@ const days = [
 
 // Sandbox Code for Functions to be able to render any date
 
-// Temp Data
+// Main Dataset
 const data = [
   {
     name: 'Christmas Day',
@@ -214,25 +214,11 @@ const data = [
     date: 14,
   },
   {
-    name: 'Bill Filing Deadline',
-    type: 'legislative',
-    dateType: 'session',
-    month: 2,
-    date: 60, // 60th day of session
-  },
-  {
     name: "New Year's Day",
     type: 'holiday',
     dateType: 'static',
     month: 0,
     date: 1,
-  },
-  {
-    name: 'Sine Die',
-    type: 'legislative',
-    dateType: 'session',
-    month: 4, // Not always in May!,
-    date: 140,
   },
   {
     name: 'Veterans Day',
@@ -322,6 +308,19 @@ const data = [
   },
 ];
 
+const sessionData = [
+  {
+    name: 'Bill Filing Deadline',
+    dateType: 'session',
+    sessionDay: 60, // 60th day of session
+  },
+  {
+    name: 'Sine Die',
+    dateType: 'session',
+    sessionDay: 140,
+  },
+];
+
 // So maybe the overall function is:
 function renderMonth(change) {
   // Everything goes in here
@@ -384,26 +383,21 @@ function renderMonth(change) {
   const firstDayNum = dateFns.getDay(firstDay);
   // const dayOfWeek = days[dateFns.getDay(new Date(firstDay))];
 
-  // Render the calendar into the calendar grid (dont' worry about the mobile version for now)
+  // Render the calendar into the calendar grid
   let calendarInfo = [];
   let calendarInfoMobile = [];
 
   // *********************************************
   // Put all code filtering the date into the final dataset to be rendered to the calendar here
 
+  // Pull out only calendar dates (excluding session dates) and put them in a separate array
   const thisMonthData = data.filter(item => item.month === currentMonth);
-
+  // calculate the dates for flex dateType items and return all non-sesion dates to a
+  // finalData array
   const finalData = thisMonthData.map(date => {
     let newDate;
 
-    if (date.dateType === 'session') {
-      // Figure out the new date based on days after session starts
-      const setDate = dateFns.addDays(
-        new Date(sessionStartDate),
-        date.date - 1
-      );
-      newDate = dateFns.getDate(new Date(setDate));
-    } else if (date.dateType === 'flex') {
+    if (date.dateType === 'flex') {
       // Figure out for flex date
       // start by asking if the item's date.weekday is the first day of the month
       // if so, start the next calculation
@@ -432,6 +426,39 @@ function renderMonth(change) {
       date: newDate,
     };
   });
+
+  // Push the calculated session dates into finalData only during odd years
+  if (currentYear % 2 !== 0) {
+    // Recalculate the start of session for the calendar dates only
+    let calSessionStartDate = dateFns.startOfYear(new Date(currentYear, 0, 1));
+    while (!dateFns.isTuesday(calSessionStartDate)) {
+      calSessionStartDate = dateFns.addDays(calSessionStartDate, 1);
+    }
+    calSessionStartDate = dateFns.addDays(calSessionStartDate, 7);
+
+    // Calculate the month/date of session calendar dates
+    const finalSessionData = sessionData.map(item => {
+      // console.log('sessionStartDate: ', sessionStartDate);
+      const newDay = dateFns.addDays(
+        new Date(calSessionStartDate),
+        item.sessionDay - 1
+      );
+      const newDate = dateFns.getDate(new Date(newDay));
+      const newMonth = dateFns.getMonth(new Date(newDay));
+      return {
+        name: item.name,
+        type: 'legislative',
+        date: newDate,
+        month: newMonth,
+      };
+    });
+
+    finalSessionData.forEach(item => {
+      if (item.month === currentMonth) {
+        finalData.push(item);
+      }
+    });
+  }
 
   // *********************************************
 
