@@ -1,7 +1,7 @@
 // Grab elements needed for JavaScript operations
 const sessionMessage = document.querySelector('.session-message');
 const time = document.querySelector('.time');
-const calendar = document.querySelector('.calendar');
+// const calendar = document.querySelector('.calendar');
 const calendarTitle = document.querySelector('.calendar-title');
 const calendarGrid = document.querySelector('.calendar-grid');
 const backButton = document.querySelector('.left');
@@ -163,7 +163,7 @@ const days = [
 
 // Sandbox Code for Functions to be able to render any date
 
-// Main Dataset
+// Main Dataset (Rosh Hashanah, Yom Kippur, Easter & Good Friday are only good thru 2020 dates)
 const data = [
   {
     name: 'Christmas Day',
@@ -212,6 +212,20 @@ const data = [
     dateType: 'static',
     month: 2,
     date: 14,
+  },
+  {
+    name: "Harry Potter's Birthday",
+    type: 'birthday',
+    dateType: 'static',
+    month: 6,
+    date: 31,
+  },
+  {
+    name: 'Original Star Wars premier in 1977',
+    type: 'birthday',
+    dateType: 'static',
+    month: 4,
+    date: 25,
   },
   {
     name: "New Year's Day",
@@ -312,6 +326,104 @@ const data = [
     dateType: 'static',
     month: 3,
     date: 15,
+  },
+  {
+    name: 'General Election',
+    type: 'legislative',
+    dateType: 'general',
+    month: 10,
+  },
+  {
+    name: 'First Day legislators may file bills for the legislative session',
+    type: 'legislative',
+    dateType: 'firstDay',
+    month: 10,
+  },
+  {
+    name: 'Memorial Day',
+    type: 'holiday',
+    dateType: 'memorial',
+    month: 4,
+  },
+  {
+    name: 'Easter',
+    type: 'holiday',
+    dateType: 'goofy',
+    year: 2019,
+    month: 3,
+    date: 21,
+  },
+  {
+    name: 'Easter',
+    type: 'holiday',
+    dateType: 'goofy',
+    year: 2020,
+    month: 3,
+    date: 12,
+  },
+  {
+    name: 'Good Friday',
+    type: 'holiday',
+    dateType: 'goofy',
+    year: 2019,
+    month: 3,
+    date: 19,
+  },
+  {
+    name: 'Good Friday',
+    type: 'holiday',
+    dateType: 'goofy',
+    year: 2020,
+    month: 3,
+    date: 10,
+  },
+  {
+    name: 'Yom Kippur',
+    type: 'holiday',
+    dateType: 'goofy',
+    year: 2019,
+    month: 9,
+    date: 9,
+  },
+  {
+    name: 'Yom Kippur',
+    type: 'holiday',
+    dateType: 'goofy',
+    year: 2020,
+    month: 8,
+    date: 28,
+  },
+  {
+    name: 'Rosh Hashanah',
+    type: 'holiday',
+    dateType: 'goofy',
+    year: 2019,
+    month: 8,
+    date: 30,
+  },
+  {
+    name: 'Rosh Hashanah',
+    type: 'holiday',
+    dateType: 'goofy',
+    year: 2019,
+    month: 9,
+    date: 1,
+  },
+  {
+    name: 'Rosh Hashanah',
+    type: 'holiday',
+    dateType: 'goofy',
+    year: 2020,
+    month: 8,
+    date: 19,
+  },
+  {
+    name: 'Rosh Hashanah',
+    type: 'holiday',
+    dateType: 'goofy',
+    year: 2020,
+    month: 8,
+    date: 20,
   },
 ];
 
@@ -535,6 +647,32 @@ function renderMonth(change) {
       }
       // after matching up weekday days, next calc here
       newDate = 1 + (date.date.nth - 1) * 7 + counter;
+      // Only include general election if it's the correct year
+    } else if (date.dateType === 'general' && currentYear % 2 === 0) {
+      let monthStart = dateFns.startOfMonth(new Date(currentYear, date.month));
+      while (!dateFns.isMonday(monthStart)) {
+        monthStart = dateFns.addDays(monthStart, 1);
+      }
+      monthStart = dateFns.addDays(monthStart, 1);
+
+      newDate = dateFns.getDate(new Date(monthStart));
+    } else if (date.dateType === 'firstDay' && currentYear % 2 === 0) {
+      let monthStart = dateFns.startOfMonth(new Date(currentYear, date.month));
+      while (!dateFns.isMonday(monthStart)) {
+        monthStart = dateFns.addDays(monthStart, 1);
+      }
+      monthStart = dateFns.addDays(monthStart, 7);
+      newDate = dateFns.getDate(new Date(monthStart));
+    } else if (date.dateType === 'memorial') {
+      let monthEnd = dateFns.endOfMonth(new Date(currentYear, date.month));
+      while (!dateFns.isMonday(monthEnd)) {
+        monthEnd = dateFns.subDays(monthEnd, 1);
+      }
+      newDate = dateFns.getDate(new Date(monthEnd));
+    } else if (date.dateType === 'goofy') {
+      if (date.year === currentYear) {
+        newDate = date.date;
+      }
     } else {
       newDate = date.date;
     }
@@ -594,7 +732,7 @@ function renderMonth(change) {
         `<div class="calendar-item ${item.type}">${item.name}</div>`
       );
       calendarInfoMobile.push(
-        `<div class="calendar__item--mobile ${item.type}">${item.date} ${
+        `<div class="calendar__item--mobile ${item.type}">${item.date}st ${
           item.name
         }</div>`
       );
@@ -613,14 +751,24 @@ function renderMonth(change) {
     );
 
     finalData.forEach(item => {
+      let suffix;
+      if (item.date % 10 === 1 && item.date !== 11) {
+        suffix = 'st';
+      } else if (item.date % 10 === 2 && item.date !== 12) {
+        suffix = 'nd';
+      } else if (item.date % 10 === 3 && item.date !== 13) {
+        suffix = 'rd';
+      } else {
+        suffix = 'th';
+      }
       if (item.date === i) {
         calendarInfo.push(`
             <div class="calendar-item ${item.type}">${item.name}</div>
           `);
         calendarInfoMobile.push(
-          `<div class="calendar__item--mobile ${item.type}">${item.date} ${
-            item.name
-          }</div>`
+          `<div class="calendar__item--mobile ${item.type}">${
+            item.date
+          }${suffix} ${item.name}</div>`
         );
       }
     });

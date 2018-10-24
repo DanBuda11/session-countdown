@@ -20,7 +20,7 @@ body {
   min-height: 100vh;
 }
 
-header, .clock, .message, .calendar, footer {
+header, .clock, .calendar, footer {
   text-align: center;
 }
 
@@ -91,10 +91,6 @@ header {
     ul li {
     }
   }
-}
-
-.message {
-  text-align: center;
 }
 
 .calendar {
