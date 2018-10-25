@@ -123,18 +123,18 @@ header {
     display: none;
     grid-template-columns: repeat(7, 1fr);
 
-    .day-block {
+    .cal__block {
       border: 1px solid #222;
       margin-left: -1px;
       margin-bottom: -1px;
       min-height: 60px;
       padding: 5px;
 
-      .day-date {
+      .cal__date {
         text-align: right;
       }
 
-      .calendar-item {
+      .cal__item {
         text-align: left;
         font-size: 12px;
 
@@ -148,7 +148,7 @@ header {
         color: green;
       }
 
-      .birthday {
+      .other {
         color: red;
       }
     }
@@ -157,6 +157,9 @@ header {
 
 .cal__mobile {
 
+  .cal__item--mobile {
+    
+  }
 }
 
 footer {
