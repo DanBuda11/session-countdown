@@ -19,17 +19,26 @@ body {
   min-height: 100vh;
 }
 
-header, .clock, .calendar, footer {
+header, .clock, .cal, footer {
   text-align: center;
 }
 
 header {
-  background-image: linear-gradient(rgba(0,0,0,0), rgba(0,0,0,0.5)), url('../images/capitol.png');
-  background-size: cover;
-  background-position: center;
-  min-height: 150px;
-  display: grid;
-  padding: 0 1em;
+  // background-image: linear-gradient(rgba(0,0,0,0), rgba(0,0,0,0.5)), url('../images/capitol.png');
+  // background-size: cover;
+  // background-position: center;
+  // min-height: 150px;
+  // display: grid;
+  // padding: 0 1em;
+  display: flex;
+  justify-content: space-evenly;
+  background: linear-gradient(to right, white, #021128 45%);
+  padding: 10px;
+
+  .header__logo {
+    height: 100px;
+    border-radius: 50%;
+  }
 
   .header__title {
     margin: 0;
@@ -48,7 +57,7 @@ header {
     text-align: center;
   }
 
-  .clock__time, .clock__labels {
+  .clock__time {
     
     ul {
       display: flex;
@@ -56,42 +65,33 @@ header {
       list-style: none;
       margin: 0;
       padding: 0;
-    }
 
-    ul .clock__label {
-      display: block;
-    }
-  }
+      .clock__time--numbers {
+        font-size: 40px;
+        font-family: 'Roboto Mono', sans-serif;
+        color: #f31431;
+      }
 
-  .clock__time {
-    font-size: 40px;
-
-    ul li {
-      font-family: 'Roboto Mono', sans-serif;
-      color: #f31431;
-    }
-  }
-
-  .clock__labels {
-    font-size: 20px;
-
-    ul .clock__label {
+      .clock__time--labels {
+        display: block;
+        font-size: 20px;
+      }
     }
   }
 }
 
-.calendar {
+.cal {
   width: 95%;
   max-width: 800px;
   margin: 0 auto;
   
-  .calendar__buttons {
+  .cal__btns {
     display: flex;
     justify-content: space-around;
     max-width: 350px;
     margin: 1em auto;
 
-    .calendar__button {
+    .cal__btn {
       width: 75px;
       border-radius: 5px;
       border: none;
@@ -100,7 +100,7 @@ header {
       outline: none;
     }
 
-    .calendar__title {
+    .cal__title {
       margin: 0;
       align-self: center;
       font-weight: bold;
@@ -109,17 +109,17 @@ header {
     }
   }
 
-  .calendar__days {
+  .cal__days {
     display: none;
     grid-template-columns: repeat(7, 1fr);
     padding-bottom: 10px;
   }
 
-  .calendar__day {
+  .cal__day {
 
   }
 
-  .calendar__grid {
+  .cal__grid {
     display: none;
     grid-template-columns: repeat(7, 1fr);
 
@@ -155,7 +155,7 @@ header {
   }
 }
 
-.calendar__mobile {
+.cal__mobile {
 
 }
 
@@ -190,17 +190,17 @@ footer {
 }
 
 @media (min-width: 650px) {
-  .calendar {
-    .calendar__days {
+  .cal {
+    .cal__days {
       display: grid;
     }
 
-    .calendar__grid {
+    .cal__grid {
       display: grid;
     }
   }
 
-  .calendar__mobile {
+  .cal__mobile {
     display: none;
   }
 }

@@ -2,17 +2,17 @@
 const clockMessage = document.querySelector('.clock__message');
 const time = document.querySelector('.clock__time');
 // const calendar = document.querySelector('.calendar');
-const calendarTitle = document.querySelector('.calendar__title');
-const calendarGrid = document.querySelector('.calendar__grid');
-const leftButton = document.querySelector('.calendar__button--left');
-const rightButton = document.querySelector('.calendar__button--right');
-const calendarMobile = document.querySelector('.calendar__mobile');
+const calendarTitle = document.querySelector('.cal__title');
+const calendarGrid = document.querySelector('.cal__grid');
+const leftBtn = document.querySelector('.cal__btn--left');
+const rightBtn = document.querySelector('.cal__btn--right');
+const calendarMobile = document.querySelector('.cal__mobile');
 
 // Add event listeners to back/forward month buttons
-leftButton.addEventListener('click', () => {
+leftBtn.addEventListener('click', () => {
   renderMonth(-1);
 });
-rightButton.addEventListener('click', () => {
+rightBtn.addEventListener('click', () => {
   renderMonth(1);
 });
 
@@ -99,13 +99,23 @@ function countdown() {
 
   time.innerHTML = `
     <ul>
-      <li>${daysLeft}</li>
-      <li>:</li>
-      <li>${hoursLeft < 10 ? '0' : ''}${hoursLeft}</li>
-      <li>:</li>
-      <li>${minutesLeft < 10 ? '0' : ''}${minutesLeft}</li>
-      <li>:</li>
-      <li>${secondsLeft < 10 ? '0' : ''}${secondsLeft}</li>
+      <li class="clock__time--numbers">${daysLeft}</li>
+      <li class="clock__time--numbers">:</li>
+      <li class="clock__time--numbers">${
+        hoursLeft < 10 ? '0' : ''
+      }${hoursLeft}</li>
+      <li class="clock__time--numbers">:</li>
+      <li class="clock__time--numbers">${
+        minutesLeft < 10 ? '0' : ''
+      }${minutesLeft}</li>
+      <li class="clock__time--numbers">:</li>
+      <li class="clock__time--numbers">${
+        secondsLeft < 10 ? '0' : ''
+      }${secondsLeft}</li>
+      <li class="clock__time--labels">Days</li>
+      <li class="clock__time--labels">Hours</li>
+      <li class="clock__time--labels">Minutes</li>
+      <li class="clock__time--labels">Seconds</li>
     </ul>
 `;
 }
