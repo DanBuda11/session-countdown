@@ -1,18 +1,18 @@
 // Grab elements needed for JavaScript operations
-const sessionMessage = document.querySelector('.session-message');
-const time = document.querySelector('.time');
+const clockMessage = document.querySelector('.clock__message');
+const time = document.querySelector('.clock__time');
 // const calendar = document.querySelector('.calendar');
-const calendarTitle = document.querySelector('.calendar-title');
-const calendarGrid = document.querySelector('.calendar-grid');
-const backButton = document.querySelector('.left');
-const forwardButton = document.querySelector('.right');
-const calendarMobile = document.querySelector('.calendar-mobile');
+const calendarTitle = document.querySelector('.calendar__title');
+const calendarGrid = document.querySelector('.calendar__grid');
+const leftButton = document.querySelector('.calendar__button--left');
+const rightButton = document.querySelector('.calendar__button--right');
+const calendarMobile = document.querySelector('.calendar__mobile');
 
 // Add event listeners to back/forward month buttons
-backButton.addEventListener('click', () => {
+leftButton.addEventListener('click', () => {
   renderMonth(-1);
 });
-forwardButton.addEventListener('click', () => {
+rightButton.addEventListener('click', () => {
   renderMonth(1);
 });
 
@@ -92,9 +92,9 @@ function countdown() {
   );
 
   if (duringSession === true) {
-    sessionMessage.innerText = `Your life will begin anew in:`;
+    clockMessage.innerText = `Your life will begin anew in:`;
   } else {
-    sessionMessage.innerText = `YOUR LIFE ENDS IN:`;
+    clockMessage.innerText = `YOUR LIFE ENDS IN:`;
   }
 
   time.innerHTML = `

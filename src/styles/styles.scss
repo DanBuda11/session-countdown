@@ -10,7 +10,6 @@ body {
   margin: 0;
   font-family: 'Roboto', sans-serif;
   color: #222;
-  // padding: 1em;
 }
 
 .wrapper {
@@ -25,13 +24,11 @@ header, .clock, .calendar, footer {
 }
 
 header {
-  // margin: 1em;
   background-image: linear-gradient(rgba(0,0,0,0), rgba(0,0,0,0.5)), url('../images/capitol.png');
   background-size: cover;
   background-position: center;
   min-height: 150px;
   display: grid;
-  // border-radius: 10px;
   padding: 0 1em;
 
   .header__title {
@@ -39,28 +36,19 @@ header {
     align-self: center;
     color: white;
   }
-  
-  
-  // img {
-  //   max-width: 500px;
-  //   width: 90%;
-  //   border-radius: 35%;
-  // }
 }
 
 .clock {
-  // padding-top: 2em;
-  // max-width: 90%;
   text-align: center;
   margin: 0 auto;
 
-  .session-message {
+  .clock__message {
     font-size: 20px;
     margin: 0;
     text-align: center;
   }
 
-  .time, .time-labels {
+  .clock__time, .clock__labels {
     
     ul {
       display: flex;
@@ -68,15 +56,14 @@ header {
       list-style: none;
       margin: 0;
       padding: 0;
-      // max-width: 90%;
     }
 
-    ul li {
+    ul .clock__label {
       display: block;
     }
   }
 
-  .time {
+  .clock__time {
     font-size: 40px;
 
     ul li {
@@ -85,27 +72,26 @@ header {
     }
   }
 
-  .time-labels {
+  .clock__labels {
     font-size: 20px;
 
-    ul li {
+    ul .clock__label {
     }
   }
 }
 
 .calendar {
-  // display: none;
   width: 95%;
   max-width: 800px;
   margin: 0 auto;
   
-  .buttons {
+  .calendar__buttons {
     display: flex;
     justify-content: space-around;
     max-width: 350px;
     margin: 1em auto;
 
-    button {
+    .calendar__button {
       width: 75px;
       border-radius: 5px;
       border: none;
@@ -114,7 +100,7 @@ header {
       outline: none;
     }
 
-    .calendar-title {
+    .calendar__title {
       margin: 0;
       align-self: center;
       font-weight: bold;
@@ -123,17 +109,17 @@ header {
     }
   }
 
-  .weekdays {
+  .calendar__days {
     display: none;
     grid-template-columns: repeat(7, 1fr);
     padding-bottom: 10px;
   }
 
-  .weekday {
+  .calendar__day {
 
   }
 
-  .calendar-grid {
+  .calendar__grid {
     display: none;
     grid-template-columns: repeat(7, 1fr);
 
@@ -169,7 +155,7 @@ header {
   }
 }
 
-.calendar-mobile {
+.calendar__mobile {
 
 }
 
@@ -180,16 +166,16 @@ footer {
   p {
     font-weight: bold;
 
-    a {
+    .footer__link {
       color: #444;
       text-decoration: none;
     }
 
-    a:visited {
+    .footer__link:visited {
       color: #444;
     }
 
-    a:hover {
+    .footer__link:hover {
       color: #222;
     }
   }
@@ -197,7 +183,7 @@ footer {
 
 @media (min-width: 430px) {
   .clock {
-    .time {
+    .clock__time {
       font-size: 60px;
     }
   }
@@ -205,16 +191,16 @@ footer {
 
 @media (min-width: 650px) {
   .calendar {
-    .weekdays {
+    .calendar__days {
       display: grid;
     }
 
-    .calendar-grid {
+    .calendar__grid {
       display: grid;
     }
   }
 
-  .calendar-mobile {
+  .calendar__mobile {
     display: none;
   }
 }

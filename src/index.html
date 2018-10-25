@@ -2,8 +2,9 @@
 <html lang="en">
 
 <head>
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <meta charset="UTF-8">
   <title>Texas Legislature Session Countdown</title>
   <!-- Change favicon name for your own project -->
   <link rel="icon" type="image/x-icon" href="buddha.ico" />
@@ -30,27 +31,27 @@
       <h1 class="header__title">Texas Session Countdown</h1>
     </header>
     <section class="clock">
-      <p class="session-message"></p>
-      <div class="time">
+      <p class="clock__message"></p>
+      <div class="clock__time">
 
       </div>
-      <div class="time-labels">
+      <div class="clock__labels">
         <ul>
-          <li>Days</li>
-          <li>Hours</li>
-          <li>Minutes</li>
-          <li>Seconds</li>
+          <li class="clock__label">Days</li>
+          <li class="clock__label">Hours</li>
+          <li class="clock__label">Minutes</li>
+          <li class="clock__label">Seconds</li>
         </ul>
       </div>
     </section>
     <section class="calendar">
-      <div class="buttons">
-        <button class="left"><i class="fas fa-long-arrow-alt-left fa-2x"></i></button>
-        <p class="calendar-title"></p>
-        <button class="right"><i class="fas fa-long-arrow-alt-right fa-2x"></i></button>
+      <div class="calendar__buttons">
+        <button class="calendar__button calendar__button--left"><i class="fas fa-long-arrow-alt-left fa-2x"></i></button>
+        <p class="calendar__title"></p>
+        <button class="calendar__button calendar__button--right"><i class="fas fa-long-arrow-alt-right fa-2x"></i></button>
       </div>
-      <div class="weekdays">
-        <div class="weekday">Sunday</div>
+      <div class="calendar__days">
+        <div class="calendar__day">Sunday</div>
         <div class="weekday">Monday</div>
         <div class="weekday">Tuesday</div>
         <div class="weekday">Wednesday</div>
@@ -58,11 +59,11 @@
         <div class="weekday">Friday</div>
         <div class="weekday">Saturday</div>
       </div>
-      <div class="calendar-grid"></div>
+      <div class="calendar__grid"></div>
     </section>
-    <section class="calendar-mobile"></section>
+    <section class="calendar__mobile"></section>
     <footer>
-      <p>A <a href="https://danbuda.com" target="_blank">Dan Buda</a> Joint</p>
+      <p>A <a href="https://danbuda.com" class="footer__link" target="_blank">Dan Buda</a> Joint</p>
     </footer>
   </div>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/date-fns/1.29.0/date_fns.min.js"></script>
