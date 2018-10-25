@@ -27,8 +27,10 @@ let currentMonth = dateFns.getMonth(new Date());
 // Determine if odd or even year then if even, add a year to currentYear
 if (currentYear % 2 === 0) {
   sessionYear = currentYear + 1;
+  console.log(sessionYear);
 } else {
   sessionYear = currentYear;
+  console.log(sessionYear);
 }
 
 // Find the start of the sessionYear
@@ -57,6 +59,7 @@ function countdown() {
     end = sineDieDate;
   } else {
     duringSession = false;
+    // During interim, 'end' needs to be the NEXT sessionStartDate
     end = sessionStartDate;
   }
 
