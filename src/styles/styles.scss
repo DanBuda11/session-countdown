@@ -40,10 +40,33 @@ header {
     border-radius: 50%;
   }
 
-  .header__title {
-    margin: 0;
-    align-self: center;
+  .header__text {
     color: white;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    .header__title {
+      margin: 0;
+      align-self: center;
+    }
+  
+    .header__subtitle {
+      margin: 0;
+
+      .header__link {
+        color: white;
+        text-decoration: none;
+      }
+  
+      .header__link:visited {
+        color: white;
+      }
+  
+      .header__link:hover {
+        color: white;
+        text-decoration: underline;
+      }
+    }
   }
 }
 
@@ -90,6 +113,7 @@ header {
     justify-content: space-around;
     max-width: 350px;
     margin: 1em auto;
+    
 
     .cal__btn {
       width: 75px;
@@ -98,6 +122,7 @@ header {
       background-color: #021128;
       color: white;
       outline: none;
+      cursor: pointer;
     }
 
     .cal__title {
@@ -159,28 +184,6 @@ header {
 
   .cal__item--mobile {
     
-  }
-}
-
-footer {
-  padding: 1em;
-  text-align: center;
-
-  p {
-    font-weight: bold;
-
-    .footer__link {
-      color: #444;
-      text-decoration: none;
-    }
-
-    .footer__link:visited {
-      color: #444;
-    }
-
-    .footer__link:hover {
-      color: #222;
-    }
   }
 }
 
