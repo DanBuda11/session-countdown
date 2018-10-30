@@ -108,7 +108,6 @@ function countdown() {
   }
 
   time.innerHTML = `
-  <ul>
     <li class="clock__time--numbers">${daysLeft}</li>
     <li class="clock__time--numbers">:</li>
     <li class="clock__time--numbers">${
@@ -123,10 +122,9 @@ function countdown() {
       secondsLeft < 10 ? '0' : ''
     }${secondsLeft}</li>
     <li class="clock__time--labels">Days</li>
-    <li class="clock__time--labels">Hours</li>
-    <li class="clock__time--labels">Minutes</li>
-    <li class="clock__time--labels">Seconds</li>
-  </ul>
+    <li class="clock__time--labels clock__time--hours">Hours</li>
+    <li class="clock__time--labels clock__time--minutes">Minutes</li>
+    <li class="clock__time--labels clock__time--seconds">Seconds</li>
 `;
 }
 
@@ -693,12 +691,12 @@ function renderMonth(change) {
   finalData.forEach(item => {
     if (item.date === 1) {
       calendarInfo.push(
-        `<div class="cal__item ${item.type}">${item.name}</div>`
+        `<div class="cal__item ${item.type}">&#8226 ${item.name}</div>`
       );
       calendarInfoMobile.push(
-        `<div class="cal__item--mobile ${item.type}">${item.date}st ${
-          item.name
-        }</div>`
+        `<p class="cal__mobile--date">${
+          item.date
+        }st</p><p class="cal__mobile--name ${item.type}">${item.name}</p>`
       );
     }
   });
@@ -725,12 +723,14 @@ function renderMonth(change) {
       }
       if (item.date === i) {
         calendarInfo.push(`
-            <div class="cal__item ${item.type}">${item.name}</div>
+            <div class="cal__item ${item.type}">&#8226 ${item.name}</div>
           `);
         calendarInfoMobile.push(
-          `<div class="cal__item--mobile ${item.type}">${item.date}${suffix} ${
+          `<p class="cal__mobile--date">${
+            item.date
+          }${suffix}</p><p class="cal__mobile--name ${item.type}">${
             item.name
-          }</div>`
+          }</p>`
         );
       }
     });
@@ -741,7 +741,8 @@ function renderMonth(change) {
   // Render calendar
   calendarGrid.innerHTML = calendarInfo.join('');
   if (calendarInfoMobile.length === 0) {
-    calendarMobile.innerHTML = '<p>Nothing This Month!</p>';
+    calendarMobile.innerHTML =
+      '<p class="cal__mobile--empty">Nothing This Month!</p>';
   } else {
     calendarMobile.innerHTML = calendarInfoMobile.join('');
   }
