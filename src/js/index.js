@@ -13,34 +13,29 @@ rightBtn.addEventListener('click', () => {
   renderMonth(1);
 });
 
-// Set variables for current month and year for initial calendar render
+// Set globally used variables
 let currentYear = dateFns.getYear(new Date());
 let currentMonth = dateFns.getMonth(new Date());
 
-// **************************************************************
+// ***********************************************************************************
 // Start of Countdown Clock Code
 
 function countdown() {
   // Create variable to store what the year of session will be
   let sessionYear;
-  // find the current year (2019, 0, 1 is only in there for testing - it should be empty)
+  // Find current year
   const currentYear = dateFns.getYear(new Date());
-  // is "now" during session or not?
+  // Store whether or not current time is during session
   let duringSession;
-  // create variable to store the date that session starts
+  // Create variable to store the date that session starts
   let sessionStartDate;
-
-  // store date for sine die
+  // Store date for Sine Die
   let sineDieDate;
-
-  // get info for right now and store in variable "now" (2019, 2, 15 is only in for testting - should be blank)
+  // Now means now
   const now = new Date();
-  // console.log('now: ', now);
-  // create variable to store the end date for the countdown depending on when during the 2 year cycle you are
   let end;
-  // console.log('currentYear: ', currentYear);
 
-  // function to get the 1st day of a legislative session
+  // Set the first day of a legislative session
   function getDate(year) {
     let startDate = dateFns.startOfYear(new Date(year, 0, 1));
     while (!dateFns.isTuesday(startDate)) {
@@ -48,75 +43,45 @@ function countdown() {
     }
     sessionStartDate = dateFns.addDays(startDate, 7);
     sessionStartDate = dateFns.addHours(sessionStartDate, 12);
-    // console.log('sSD: ', sessionStartDate);
-    // sineDieDate = dateFns.addDays(sessionStartDate, 139);
-    // console.log('sessionStartDate: ', sessionStartDate);
-    // console.log('sineDieDate: ', sineDieDate);
   }
 
   if (currentYear % 2 === 0) {
-    console.log('In an even year');
     // In even year so need to get sessionStartDate for next year
-    // So session year has to be next year
     sessionYear = currentYear + 1;
     getDate(sessionYear);
-    // in this scenario, we're counting down to when session starts
+    // Countdown ends when session starts
     end = sessionStartDate;
-    // this time period is not during session
     duringSession = false;
-    // console.log('countdown end: ', end);
-    // console.log('duringSession: ', duringSession);
   } else {
-    //You're in an odd year now
-    console.log('In an odd year');
+    // Odd year
     sessionYear = currentYear;
-    // get session start date for the current year (it may or may not already have passed)
+    // Get sessionStartDate for current year
     getDate(sessionYear);
-    // when is sine die of this year?
+    // Calculate Sine Die date
     sineDieDate = dateFns.addDays(sessionStartDate, 139);
     sineDieDate = dateFns.subHours(sineDieDate, 12);
-    // console.log(
-    //   'sessionStartDate when you get to odd year code: ',
-    //   sessionStartDate
-    // );
-    // console.log(
-    //   'sine die date at first getting to odd year code: ',
-    //   sineDieDate
-    // );
-    // console.log('sessionYear: ', sessionYear);
-    // If you're in session:
+
     if (
+      // If during session
       dateFns.isBefore(sessionStartDate, now) &&
       dateFns.isBefore(now, sineDieDate)
     ) {
       duringSession = true;
-      console.log('In the middle of session in an odd year');
       end = sineDieDate;
-      // console.log('during session end: ', end);
-      // Not in session but during session year and before session start date
     } else if (dateFns.isBefore(now, sessionStartDate)) {
+      // In a session year before session has started
       duringSession = false;
       end = sessionStartDate;
-      console.log('In an odd year before session starts');
-      // console.log('before session during session year end: ', end);
-      // Not in session but in session year and after sine die
     } else {
-      console.log('In an odd year after session has ended');
+      // In a session year after session has ended
       const nextSessionYear = sessionYear + 2;
-      console.log('nSY: ', nextSessionYear);
       getDate(nextSessionYear);
       end = sessionStartDate;
-      // Not in session but after sine die
       duringSession = false;
-      // end = next session start date 2 years away
-
-      // getDate(sessionYear + 2);
-      // end = sessionStartDate;
-      // console.log('after sine die end: ', end);
     }
   }
-  console.log('now: ', now);
-  console.log('end: ', end);
+  // console.log('now: ', now);
+  // console.log('end: ', end);
 
   // Calculate time left until (session start, sine die)
   const daysLeft = -dateFns.differenceInDays(now, end);
@@ -137,7 +102,7 @@ function countdown() {
   );
 
   if (duringSession === true) {
-    clockMessage.innerText = `Your life will begin anew in:`;
+    clockMessage.innerText = `YOUR LIFE RESUMES IN:`;
   } else {
     clockMessage.innerText = `YOUR LIFE ENDS IN:`;
   }
@@ -168,7 +133,7 @@ function countdown() {
 setInterval(countdown, 1000);
 countdown();
 
-// ************************************************************
+// ******************************************************************************
 // Start of Calendar Code
 
 const months = [
@@ -587,14 +552,11 @@ const sessionData = [
 ];
 
 function renderMonth(change) {
-  // First check to see if this is the initial run of the function on page load with
-  // change = 0
+  // Is this the initial run of the function on page load?
   if (change !== 0) {
-    // The rest of this is setting up what the month and year are that are needed to filter
-    // the holidays to render based on the button that was clicked (forward or backward a month)
-    // If forward button clicked
+    // Determine which month/year calendar should show on button click
     if (change === 1) {
-      // If month will change from Dec to Jan because of click
+      // If month will change from Dec to Jan
       if (currentMonth === 11) {
         // Set values of currentMonth and currentYear to January of next year
         currentMonth = 0;
@@ -605,13 +567,13 @@ function renderMonth(change) {
       }
       // If backward button clicked
     } else if (change === -1) {
-      // If month will change from Jan to Dec because of click
+      // If month will change from Jan to Dec
       if (currentMonth === 0) {
         // Set values of currentMonth and currentYear to Dec of previous year
         currentMonth = 11;
         --currentYear;
       } else {
-        // Decrease currentMonth by 1 if year didn't change
+        // Decrease month by 1 if year didn't change
         --currentMonth;
       }
     }
@@ -620,9 +582,9 @@ function renderMonth(change) {
   // Show current month & year in calendar title
   calendarTitle.textContent = `${months[currentMonth]} ${currentYear}`;
 
-  // How many days in the current month?
+  // Number of days in the current month
   const monthDays = dateFns.getDaysInMonth(new Date(currentYear, currentMonth));
-  // // What's the first day of the month?
+  // First day of the month
   const firstDay = dateFns.startOfMonth(new Date(currentYear, currentMonth));
   const firstDayNum = dateFns.getDay(firstDay);
 
@@ -630,13 +592,9 @@ function renderMonth(change) {
   let calendarInfo = [];
   let calendarInfoMobile = [];
 
-  // *********************************************
-  // Put all code filtering the date into the final dataset to be rendered to the calendar here
-
   // Pull out only calendar dates (excluding session dates) and put them in a separate array
   const thisMonthData = data.filter(item => item.month === currentMonth);
-  // calculate the dates for flex dateType items and return all non-sesion dates to a
-  // finalData array
+  // Calculate the dates for flex dateType items and return all non-sesion dates to a finalData array
   const finalData = thisMonthData.map(date => {
     let newDate;
 
@@ -725,9 +683,6 @@ function renderMonth(change) {
     });
   }
 
-  // *********************************************
-  // Populate Calendar
-
   // Push 1st calendar block into array with style to put it into 1st day of month
   calendarInfo.push(
     `<div class="cal__block" style="grid-column-start: ${firstDayNum +
@@ -783,9 +738,13 @@ function renderMonth(change) {
     calendarInfo.push(`</div>`);
   }
 
-  // Render calendar(s)
+  // Render calendar
   calendarGrid.innerHTML = calendarInfo.join('');
-  calendarMobile.innerHTML = calendarInfoMobile.join('');
+  if (calendarInfoMobile.length === 0) {
+    calendarMobile.innerHTML = '<p>Nothing This Month!</p>';
+  } else {
+    calendarMobile.innerHTML = calendarInfoMobile.join('');
+  }
 }
 
 // Initial calendar render
