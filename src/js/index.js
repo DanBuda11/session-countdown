@@ -5,6 +5,7 @@ const calendarGrid = document.querySelector('.cal__grid');
 const leftBtn = document.querySelector('.cal__btn--left');
 const rightBtn = document.querySelector('.cal__btn--right');
 const calendarMobile = document.querySelector('.cal__mobile');
+const calendarEmpty = document.querySelector('.cal__empty');
 
 leftBtn.addEventListener('click', () => {
   renderMonth(-1);
@@ -691,7 +692,7 @@ function renderMonth(change) {
   finalData.forEach(item => {
     if (item.date === 1) {
       calendarInfo.push(
-        `<div class="cal__item ${item.type}">&#8226 ${item.name}</div>`
+        `<div class="cal__item ${item.type}">${item.name}</div>`
       );
       calendarInfoMobile.push(
         `<p class="cal__mobile--date">${
@@ -723,7 +724,7 @@ function renderMonth(change) {
       }
       if (item.date === i) {
         calendarInfo.push(`
-            <div class="cal__item ${item.type}">&#8226 ${item.name}</div>
+            <div class="cal__item ${item.type}">${item.name}</div>
           `);
         calendarInfoMobile.push(
           `<p class="cal__mobile--date">${
@@ -742,7 +743,7 @@ function renderMonth(change) {
   calendarGrid.innerHTML = calendarInfo.join('');
   if (calendarInfoMobile.length === 0) {
     calendarMobile.innerHTML =
-      '<p class="cal__mobile--empty">Nothing This Month!</p>';
+      '<p class="cal_mobile--date"></p><p class="cal__mobile--name">Nothing This Month!</p>';
   } else {
     calendarMobile.innerHTML = calendarInfoMobile.join('');
   }

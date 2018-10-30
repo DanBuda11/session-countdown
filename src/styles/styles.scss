@@ -149,28 +149,26 @@ header {
     
 
     .cal__btn {
-      width: 60px;
-      // border-radius: 5px;
+      // width: 60px;
+      border-radius: 50%;
       border: none;
-      // background-color: #021128;
+      // color: #021128;
       // color: #f31431;
-      color: white;
+      // color: white;
       outline: none;
       cursor: pointer;
+      overflow: hidden;
+      padding: 0;
       // height: 40px;
-      transition: all 0.2s ease;
-
-      .fas {
-        text-shadow: 2px 2px 1px #021128,
-        -2px -2px 1px #021228,
-        -2px 2px 1px #021228,
-        2px -2px 1px #021228
-      }
+      // transition: all 0.2s ease;
+      color: #021128;
+     
+      
     }
 
-    .cal__btn:hover .fas{
-      color: #f31431;
-    }
+    
+
+
 
     .cal__title {
       margin: 0;
@@ -226,31 +224,34 @@ header {
 }
 
 .cal__mobile {
-  display: grid;
-  grid-template-columns: 13% auto;
-  width: 85%;
-  // max-width: 335px;
-  margin: 2em auto 0;
-  grid-gap: 7px;
 
-  .cal__mobile--date {
-    font-weight: bold;
-  }
+  
 
-  .cal__mobile--name {
-    line-height: 1.35;
-    font-size: 15px;
-  }
+    display: grid;
+    grid-template-columns: 13% auto;
+    width: 85%;
+    // max-width: 335px;
+    margin: 2em auto 0;
+    grid-gap: 7px;
+  
+    .cal__mobile--date {
+      font-weight: bold;
+    }
+  
+    .cal__mobile--name {
+      line-height: 1.35;
+      font-size: 15px;
+    }
+  
+    
+  
 
-  .cal__mobile--empty {
-    text-align: center;
-    font-size: 24px;
-    margin-top: 3em;
-  }
+  
+  
 }
 
 .holiday {
-  color: blue;
+  color: #3E47EF;
 }
 
 .legislative {
