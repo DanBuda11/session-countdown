@@ -99,6 +99,7 @@ header {
     display: grid;
     -ms-grid-columns: 50px 50px 50px 50px 50px 50px 50px;
     -ms-grid-rows: 100px 100px;
+    grid-template-columns: repeat(7, minmax(20px, 100px));
     justify-items: center;  
     list-style: none;
     margin: 0.7em auto;
