@@ -40,7 +40,6 @@ gulp.task('styles', function() {
         postcss([
           // Add browser prefixes
           autoprefixer({
-            browsers: ['last 2 versions'],
             grid: true,
           }),
         ])
