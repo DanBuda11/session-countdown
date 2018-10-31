@@ -41,6 +41,7 @@ gulp.task('styles', function() {
           // Add browser prefixes
           autoprefixer({
             browsers: ['last 2 versions'],
+            grid: true,
           }),
         ])
       )
