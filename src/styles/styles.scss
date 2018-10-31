@@ -95,44 +95,45 @@ header {
   }
 
   .clock__time {      
-      display: grid;
-      grid-template-columns: repeat(7, minmax(20px, 100px));    
-      justify-items: center;  
-      list-style: none;
-      margin: 0.7em auto;
-      padding: 0;
-      width: 80%;
-      max-width: 500px;
+    display: -ms-grid;  
+    display: grid;
+    -ms-grid-columns: minmax(20px, 100px) minmax(20px, 100px) minmax(20px, 100px) minmax(20px, 100px) minmax(20px, 100px) minmax(20px, 100px) minmax(20px, 100px);
+    grid-template-columns: repeat(7, minmax(20px, 100px));
+    -ms-grid-rows: min-content min-content;
+    justify-items: center;  
+    list-style: none;
+    margin: 0.7em auto;
+    padding: 0;
+    width: 80%;
+    max-width: 500px;
+
+    @media (min-width: 450px) {
+      margin: 0 auto;
+    }
+
+    .clock__time--numbers {
+      font-size: 40px;
+      font-family: 'Roboto Mono', sans-serif;
+      color: $red;
+      margin-bottom: 0.7rem;
+
+      @media (min-width: 430px) {
+        font-size: 60px;
+      }
 
       @media (min-width: 450px) {
-        margin: 0 auto;
+        margin-bottom: 4px;
       }
+    }
 
-      .clock__time--numbers {
-        font-size: 40px;
-        font-family: 'Roboto Mono', sans-serif;
-        color: $red;
-        margin-bottom: 0.7rem;
+    .clock__time--labels {
+      display: block;
+      font-size: 16px;
 
-
-
-        @media (min-width: 430px) {
-          font-size: 60px;
-        }
-
-        @media (min-width: 450px) {
-          margin-bottom: 4px;
-        }
+      @media (min-width: 330px) {
+        font-size: 20px;
       }
-
-      .clock__time--labels {
-        display: block;
-        font-size: 16px;
-
-        @media (min-width: 330px) {
-          font-size: 20px;
-        }
-      }
+    }
     
     .clock__time--hours {
       grid-column: 3 / 3;
@@ -145,6 +146,16 @@ header {
     .clock__time--seconds {
       grid-column: 7 / -1;
     }
+  }
+
+  .clock__time:nth-child(1) {
+    -ms-grid-row: 1;
+    -ms-grid-column: 1;
+  }
+
+  .clock__time:nth-child(2) {
+    -ms-grid-row: 1;
+    -ms-grid-column: 2;
   }
 }
 

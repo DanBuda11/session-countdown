@@ -39,9 +39,7 @@ gulp.task('styles', function() {
       .pipe(
         postcss([
           // Add browser prefixes
-          autoprefixer({
-            grid: true,
-          }),
+          autoprefixer({}),
         ])
       )
       // minify CSS

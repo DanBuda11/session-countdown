@@ -16,10 +16,7 @@
   "browserslist": [
     "last 1 version",
     "> 1%",
-    "not dead",
-    "IE 10",
-    "IE 11",
-    "Edge 15"
+    "not dead"
   ],
   "devDependencies": {
     "@babel/core": "^7.1.2",
