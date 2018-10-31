@@ -574,7 +574,7 @@ const sessionData = [
   },
   {
     name:
-      'First day teh senate can consider bills and resolutions on the 1st day they are place on the Intent Calendar',
+      'First day the senate can consider bills and resolutions on the 1st day they are place on the Intent Calendar',
     sessionDay: 130,
   },
   {

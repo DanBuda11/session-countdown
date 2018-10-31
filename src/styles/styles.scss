@@ -181,8 +181,12 @@ header {
     grid-template-columns: repeat(7, 1fr);
     padding-bottom: 10px;
     width: 95%;
-    max-width: 800px;
+    max-width: 1000px;
     margin: 2em auto 0.5em;
+
+    @media (min-width: 740px) {
+      display: grid;
+    }
   }
 
   .cal__grid {
@@ -192,6 +196,10 @@ header {
     width: 95%;
     max-width: 1000px;
     margin: 0 auto;
+
+    @media (min-width: 740px) {
+      display: grid;
+    }
 
     .cal__block {
       border: 1px solid $black;
@@ -206,31 +214,39 @@ header {
 
       .cal__item {
         text-align: left;
-        font-size: 15px;
+        font-size: 12px;
         line-height: 1.35;
         margin-bottom: 1em;
+
+        @media (min-width: 1075px) {
+          font-size: 14px;
+        }
       }
     }
   }
 }
 
 .cal__mobile {
-    display: grid;
-    grid-template-columns: 13% auto;
-    width: 85%;
-    margin: 2em auto 0;
-    grid-gap: 7px;
+  display: grid;
+  grid-template-columns: 13% auto;
+  width: 85%;
+  margin: 2em auto 0;
+  grid-gap: 7px;
+
+  @media (min-width: 740px) {
+    display: none;
+  }  
   
-    .cal__mobile--date {
-      font-weight: bold;
-      text-align: left;
-    }
-  
-    .cal__mobile--name {
-      line-height: 1.35;
-      font-size: 15px;
-      text-align: left;
-    }  
+  .cal__mobile--date {
+    font-weight: bold;
+    text-align: left;
+  }
+
+  .cal__mobile--name {
+    line-height: 1.35;
+    font-size: 15px;
+    text-align: left;
+  }  
 }
 
 .holiday {
@@ -243,16 +259,4 @@ header {
 
 .other {
   color: $red;
-}
-
-@media (min-width: 650px) {
-  .cal {
-    .cal__days, .cal__grid {
-      display: grid;
-    }
-  }
-
-  .cal__mobile {
-    display: none;
-  }
 }
