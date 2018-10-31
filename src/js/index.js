@@ -170,11 +170,25 @@ const data = [
     date: 25,
   },
   {
-    name: 'Day After Christmas',
+    name: "Valentine's Day",
     type: 'holiday',
     dateType: 'static',
-    month: 11,
-    date: 26,
+    month: 1,
+    date: 14,
+  },
+  {
+    name: "St. Patrick's Day",
+    type: 'holiday',
+    dateType: 'static',
+    month: 2,
+    date: 17,
+  },
+  {
+    name: 'Tax Day',
+    type: 'holiday',
+    dateType: 'static',
+    month: 3,
+    date: 15,
   },
   {
     name: 'Christmas Eve Day',
@@ -249,7 +263,7 @@ const data = [
     },
   },
   {
-    name: 'Day After Thanksgiving',
+    name: 'Black Friday',
     type: 'holiday',
     dateType: 'flex',
     month: 10,
@@ -331,6 +345,33 @@ const data = [
     month: 10,
   },
   {
+    name: 'Cinco de Mayo',
+    type: 'holiday',
+    dateType: 'static',
+    month: 4,
+    date: 5,
+  },
+  {
+    name: "Mother's Day",
+    type: 'holiday',
+    dateType: 'flex',
+    month: 4,
+    date: {
+      nth: 2,
+      weekday: 0,
+    },
+  },
+  {
+    name: "Father's Day",
+    type: 'holiday',
+    dateType: 'flex',
+    month: 5,
+    date: {
+      nth: 3,
+      weekday: 0,
+    },
+  },
+  {
     name: 'First Day legislators may file bills for the legislative session',
     type: 'legislative',
     dateType: 'firstDay',
@@ -343,7 +384,7 @@ const data = [
     month: 4,
   },
   {
-    name: 'Easter',
+    name: 'Easter Sunday',
     type: 'holiday',
     dateType: 'goofy',
     year: 2019,
@@ -421,6 +462,64 @@ const data = [
     year: 2020,
     month: 8,
     date: 20,
+  },
+  {
+    name: 'End of Fiscal Year',
+    type: 'legislative',
+    dateType: 'static',
+    month: 7,
+    date: 31,
+  },
+  {
+    name: 'Halloween',
+    type: 'holiday',
+    dateType: 'static',
+    month: 9,
+    date: 31,
+  },
+  {
+    name: "Dan Buda's Wife's Birthday",
+    type: 'other',
+    dateType: 'static',
+    month: 6,
+    date: 13,
+  },
+  {
+    name: "New Year's Eve",
+    type: 'holiday',
+    dateType: 'static',
+    month: 11,
+    date: 31,
+  },
+  {
+    name: 'Columbus Day',
+    type: 'holiday',
+    dateType: 'flex',
+    month: 9,
+    date: {
+      nth: 2,
+      weekday: 1,
+    },
+  },
+  {
+    name: 'Daylight Savings Time Starts',
+    type: 'holiday',
+    dateType: 'flex',
+    month: 2,
+    date: {
+      nth: 2,
+      weekday: 0,
+    },
+  },
+  {
+    name: 'Daylight Savings Time Ends',
+    type: 'holiday',
+    dateType: 'flex',
+    month: 10,
+    date: {
+      nth: 1,
+      weekday: 0,
+    },
   },
 ];
 
@@ -741,12 +840,7 @@ function renderMonth(change) {
 
   // Render calendar
   calendarGrid.innerHTML = calendarInfo.join('');
-  if (calendarInfoMobile.length === 0) {
-    calendarMobile.innerHTML =
-      '<p class="cal_mobile--date"></p><p class="cal__mobile--name">Nothing This Month!</p>';
-  } else {
-    calendarMobile.innerHTML = calendarInfoMobile.join('');
-  }
+  calendarMobile.innerHTML = calendarInfoMobile.join('');
 }
 
 // Initial calendar render

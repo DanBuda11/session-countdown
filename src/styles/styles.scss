@@ -1,3 +1,19 @@
+// Set color variables
+$white: #FFF;
+$dark-blue: #021128;
+$red: #f31431;
+$black: #222;
+$blue: #3E47EF;
+
+// Fix :hover issues on mobile for button transitions
+@mixin hover-supported {
+  @media not all and (pointer: coarse) {
+    &:hover {
+      @content;
+    }
+  }
+}
+
 html {
   box-sizing: border-box;
 }
@@ -5,36 +21,24 @@ html {
 *, *:before, *:after {
   box-sizing: inherit;
   margin: 0;
+  text-align: center;
 }
 
 body {
-  margin: 0;
   font-family: 'Roboto', sans-serif;
-  color: #222;
+  color: $black;
 }
 
 .wrapper {
   display: flex;
   flex-direction: column;
-  // justify-content: space-between;
-  // min-height: 100vh;
   padding-bottom: 2em;
 }
 
-header, .clock, .cal, footer {
-  text-align: center;
-}
-
 header {
-  // background-image: linear-gradient(rgba(0,0,0,0), rgba(0,0,0,0.5)), url('../images/capitol.png');
-  // background-size: cover;
-  // background-position: center;
-  // min-height: 150px;
-  // display: grid;
-  // padding: 0 1em;
   display: flex;
   justify-content: space-evenly;
-  background: linear-gradient(to right, white, #021128 45%);
+  background: linear-gradient(to right, $white, $dark-blue 45%);
   padding: 20px;
 
   .header__logo {
@@ -44,77 +48,64 @@ header {
   }
 
   .header__text {
-    color: white;
+    color: $white;
     display: flex;
     flex-direction: column;
     justify-content: space-evenly;
+    
     .header__title {
       margin: 0 0 0.5em 0;
       align-self: center;
-
     }
   
     .header__subtitle {
       margin: 0;
 
       .header__link {
-        color: white;
-        // text-decoration: none;
-        // font-weight: italic;
+        color: $white;
         transition: color 0.2s ease;
       }
   
       .header__link:visited {
-        color: white;
+        color: $white;
       }
   
       .header__link:hover {
         color: rgba(255,255,255,0.7);
-        text-decoration: underline;
-        
+        text-decoration: underline;        
       }
     }
   }
 }
 
 .clock {
-  text-align: center;
   margin: 2em auto;
 
   .clock__message {
     font-size: 25px;
     margin: 0;
-    text-align: center;
     font-weight: bold;
   }
 
-  .clock__time {
-    
-    
-      // display: flex;
-      // justify-content: space-around;
+  .clock__time {      
       display: grid;
-      grid-template-columns: repeat(7, minmax(40px, 100px));
-      // grid-template-areas:
-      //   "number colon number colon number colon number"
-      //   "label . label . label . label";
-      justify-items: center;
-      // justify-items: center;
-      // justify-content: space-around;
-      // grid-template-rows: repeat (2, 1fr);
+      grid-template-columns: repeat(7, minmax(40px, 100px));    
+      justify-items: center;  
       list-style: none;
       margin: 1em auto 0;
       padding: 0;
       width: 80%;
       max-width: 500px;
-      // overflow: hidden;
-      // grid-auto-columns: 5%;
 
       .clock__time--numbers {
         font-size: 40px;
         font-family: 'Roboto Mono', sans-serif;
-        color: #f31431;
+        color: $red;
         margin-bottom: 4px;
+
+        @media (min-width: 430px) {
+          font-size: 60px;
+        }
       }
 
       .clock__time--labels {
@@ -122,7 +113,6 @@ header {
         font-size: 20px;
       }
     
-
     .clock__time--hours {
       grid-column: 3 / 3;
     }
@@ -139,7 +129,6 @@ header {
 
 .cal {
   
-  
   .cal__btns {
     display: flex;
     justify-content: space-between;
@@ -147,28 +136,21 @@ header {
     margin: 0 auto;
     width: 85%;
     
-
     .cal__btn {
-      // width: 60px;
       border-radius: 50%;
       border: none;
-      // color: #021128;
-      // color: #f31431;
-      // color: white;
       outline: none;
       cursor: pointer;
       overflow: hidden;
       padding: 0;
-      // height: 40px;
-      // transition: all 0.2s ease;
-      color: #021128;
-     
-      
+      transition: all 0.2s ease;
+      color: $dark-blue;
+
+      @include hover-supported() {
+        background-color: $dark-blue;
+        color: $white;
+      }     
     }
-
-    
-
-
 
     .cal__title {
       margin: 0;
@@ -188,10 +170,6 @@ header {
     margin: 2em auto 0.5em;
   }
 
-  .cal__day {
-
-  }
-
   .cal__grid {
     display: none;
     grid-template-columns: repeat(7, 1fr);
@@ -201,7 +179,7 @@ header {
     margin: 0 auto;
 
     .cal__block {
-      border: 1px solid #222;
+      border: 1px solid $black;
       margin-left: -1px;
       margin-bottom: -1px;
       min-height: 80px;
@@ -216,67 +194,45 @@ header {
         font-size: 15px;
         line-height: 1.35;
         margin-bottom: 1em;
-      
-
       }
     }
   }
 }
 
 .cal__mobile {
-
-  
-
     display: grid;
     grid-template-columns: 13% auto;
     width: 85%;
-    // max-width: 335px;
     margin: 2em auto 0;
     grid-gap: 7px;
   
     .cal__mobile--date {
       font-weight: bold;
+      text-align: left;
     }
   
     .cal__mobile--name {
       line-height: 1.35;
       font-size: 15px;
-    }
-  
-    
-  
-
-  
-  
+      text-align: left;
+    }  
 }
 
 .holiday {
-  color: #3E47EF;
+  color: $blue;
 }
 
 .legislative {
-  color: #222;
+  color: $black;
 }
 
 .other {
-  color: #f31431;
-}
-
-@media (min-width: 430px) {
-  .clock {
-    .clock__time--numbers {
-      font-size: 60px;
-    }
-  }
+  color: $red;
 }
 
 @media (min-width: 650px) {
   .cal {
-    .cal__days {
-      display: grid;
-    }
-
-    .cal__grid {
+    .cal__days, .cal__grid {
       display: grid;
     }
   }
