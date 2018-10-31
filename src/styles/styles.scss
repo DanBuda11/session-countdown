@@ -96,7 +96,7 @@ header {
 
   .clock__time {      
       display: grid;
-      grid-template-columns: repeat(7, minmax(40px, 100px));    
+      grid-template-columns: repeat(7, minmax(20px, 100px));    
       justify-items: center;  
       list-style: none;
       margin: 0.7em auto;
@@ -114,6 +114,8 @@ header {
         color: $red;
         margin-bottom: 0.7rem;
 
+
+
         @media (min-width: 430px) {
           font-size: 60px;
         }
@@ -125,7 +127,11 @@ header {
 
       .clock__time--labels {
         display: block;
-        font-size: 20px;
+        font-size: 16px;
+
+        @media (min-width: 330px) {
+          font-size: 20px;
+        }
       }
     
     .clock__time--hours {
@@ -158,14 +164,15 @@ header {
       cursor: pointer;
       overflow: hidden;
       padding: 0;
-      transition: all 0.2s ease;
       background-color: $white;
       color: $dark-blue;
+      transition: all 0.2s ease;
 
-      @include hover-supported() {
+      @include hover-supported {
         background-color: $dark-blue;
         color: $white;
-      }     
+        transform: scale(1.1);
+      }   
     }
 
     .cal__title {
