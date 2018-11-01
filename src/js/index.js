@@ -6,8 +6,8 @@ const leftBtn = document.querySelector('.cal__btn--left');
 const rightBtn = document.querySelector('.cal__btn--right');
 const calendarEvents = document.querySelector('.cal__events');
 const actions = document.querySelectorAll('.cal__btn');
-const calBlocks = document.querySelectorAll('.cal__block');
 
+// Workaround to deal with mobile :hover issues
 actions.forEach(action => {
   action.addEventListener('touchstart', e => {
     action.classList.add('hover');
@@ -103,8 +103,6 @@ function countdown() {
       duringSession = false;
     }
   }
-  // console.log('now: ', now);
-  // console.log('end: ', end);
 
   // Calculate time left until (session start, sine die)
   const daysLeft = -dateFns.differenceInDays(now, end);
@@ -131,23 +129,23 @@ function countdown() {
   }
 
   time.innerHTML = `
-    <li class="clock__time--numbers">${daysLeft}</li>
-    <li class="clock__time--numbers">:</li>
-    <li class="clock__time--numbers">${
+    <li class="clock__time--number">${daysLeft}</li>
+    <li class="clock__time--number">:</li>
+    <li class="clock__time--number">${
       hoursLeft < 10 ? '0' : ''
     }${hoursLeft}</li>
-    <li class="clock__time--numbers">:</li>
-    <li class="clock__time--numbers">${
+    <li class="clock__time--number">:</li>
+    <li class="clock__time--number">${
       minutesLeft < 10 ? '0' : ''
     }${minutesLeft}</li>
-    <li class="clock__time--numbers">:</li>
-    <li class="clock__time--numbers">${
+    <li class="clock__time--number">:</li>
+    <li class="clock__time--number">${
       secondsLeft < 10 ? '0' : ''
     }${secondsLeft}</li>
-    <li class="clock__time--labels">Days</li>
-    <li class="clock__time--labels clock__time--hours">Hours</li>
-    <li class="clock__time--labels clock__time--minutes">Minutes</li>
-    <li class="clock__time--labels clock__time--seconds">Seconds</li>
+    <li class="clock__time--label">Days</li>
+    <li class="clock__time--label clock__time--hours">Hours</li>
+    <li class="clock__time--label clock__time--minutes">Minutes</li>
+    <li class="clock__time--label clock__time--seconds">Seconds</li>
 `;
 }
 
@@ -535,7 +533,7 @@ const data = [
   },
 ];
 
-// Legislative dates
+// Dates that are X days after session start date
 const sessionData = [
   {
     name: 'Bill Filing Deadline',
@@ -705,61 +703,66 @@ function renderMonth(change) {
   // Pull out only calendar dates (excluding session dates) and put them in a separate array
   const thisMonthData = data.filter(item => item.month === currentMonth);
   // Calculate the dates for flex dateType items and return all non-sesion dates to a finalData array
-  const finalData = thisMonthData.map(date => {
-    let newDate;
+  const finalData = thisMonthData
+    .filter(item => !item.year || item.year === currentYear)
+    .map(date => {
+      let newDate;
 
-    if (date.dateType === 'flex') {
-      // Is item's date.weekday the first day of the month?
-      // If so, start the next calculation
-      // If not, keep adding 1 until they match up
-      let dayCalc = date.date.weekday;
+      if (date.dateType === 'flex') {
+        // Is item's date.weekday the first day of the month?
+        // If so, start the next calculation
+        // If not, keep adding 1 until they match up
+        let dayCalc = date.date.weekday;
 
-      let counter = 0;
-      while (dayCalc !== firstDayNum) {
-        counter = ++counter;
-        if (dayCalc === 0) {
-          dayCalc = 6;
-        } else {
-          dayCalc = --dayCalc;
+        let counter = 0;
+        while (dayCalc !== firstDayNum) {
+          counter = ++counter;
+          if (dayCalc === 0) {
+            dayCalc = 6;
+          } else {
+            dayCalc = --dayCalc;
+          }
         }
-      }
-      // After matching up weekday days, next calc here
-      newDate = 1 + (date.date.nth - 1) * 7 + counter;
-      // Only include general election if it's the correct year
-    } else if (date.dateType === 'general' && currentYear % 2 === 0) {
-      let monthStart = dateFns.startOfMonth(new Date(currentYear, date.month));
-      while (!dateFns.isMonday(monthStart)) {
+        // After matching up weekday days, next calc here
+        newDate = 1 + (date.date.nth - 1) * 7 + counter;
+        // Only include general election if it's the correct year
+      } else if (date.dateType === 'general' && currentYear % 2 === 0) {
+        let monthStart = dateFns.startOfMonth(
+          new Date(currentYear, date.month)
+        );
+        while (!dateFns.isMonday(monthStart)) {
+          monthStart = dateFns.addDays(monthStart, 1);
+        }
         monthStart = dateFns.addDays(monthStart, 1);
-      }
-      monthStart = dateFns.addDays(monthStart, 1);
-      newDate = dateFns.getDate(new Date(monthStart));
-    } else if (date.dateType === 'firstDay' && currentYear % 2 === 0) {
-      let monthStart = dateFns.startOfMonth(new Date(currentYear, date.month));
-      while (!dateFns.isMonday(monthStart)) {
-        monthStart = dateFns.addDays(monthStart, 1);
-      }
-      monthStart = dateFns.addDays(monthStart, 7);
-      newDate = dateFns.getDate(new Date(monthStart));
-    } else if (date.dateType === 'memorial') {
-      let monthEnd = dateFns.endOfMonth(new Date(currentYear, date.month));
-      while (!dateFns.isMonday(monthEnd)) {
-        monthEnd = dateFns.subDays(monthEnd, 1);
-      }
-      newDate = dateFns.getDate(new Date(monthEnd));
-    } else if (date.dateType === 'goofy') {
-      if (date.year === currentYear) {
+        newDate = dateFns.getDate(new Date(monthStart));
+      } else if (date.dateType === 'firstDay' && currentYear % 2 === 0) {
+        let monthStart = dateFns.startOfMonth(
+          new Date(currentYear, date.month)
+        );
+        while (!dateFns.isMonday(monthStart)) {
+          monthStart = dateFns.addDays(monthStart, 1);
+        }
+        monthStart = dateFns.addDays(monthStart, 7);
+        newDate = dateFns.getDate(new Date(monthStart));
+      } else if (date.dateType === 'memorial') {
+        let monthEnd = dateFns.endOfMonth(new Date(currentYear, date.month));
+        while (!dateFns.isMonday(monthEnd)) {
+          monthEnd = dateFns.subDays(monthEnd, 1);
+        }
+        newDate = dateFns.getDate(new Date(monthEnd));
+      } else if (
+        (date.dateType === 'goofy' && date.year === currentYear) ||
+        date.dateType === 'static'
+      ) {
         newDate = date.date;
       }
-    } else {
-      newDate = date.date;
-    }
 
-    return {
-      name: date.name,
-      type: date.type,
-      date: newDate,
-    };
-  });
+      return {
+        name: date.name,
+        type: date.type,
+        date: newDate,
+      };
+    });
 
   // Push the calculated session dates into finalData only during odd years
   if (currentYear % 2 !== 0) {
@@ -799,56 +802,45 @@ function renderMonth(change) {
       1};"><div class="cal__date">${1}</div></div>`
   );
 
-  // Check if any calendar items in the final dataset occur on the 1st of the month
-  // finalData.forEach(item => {
-  //   // if (item.date === 1) {
-  //   //   calendarInfo.push(
-  //   //     `<div class="cal__item ${item.type}">${item.name}</div>`
-  //   //   );
-  //   calendarInfo.push(
-  //     `<p class="cal__events--date">${
-  //       item.date
-  //     }st</p><p class="cal__events--name ${item.type}">${item.name}</p>`
-  //   );
-  //   // }
-  // });
-
-  // Close div tag of 1st day of month
-  // calendarInfo.push(`</div>`);
-
   // Populate the rest of month's dates
   for (var i = 2; i < monthDays + 1; i++) {
     calendar.push(
       `<div class="cal__block"><div class="cal__date">${i}</div></div>`
     );
-
-    finalData.forEach(item => {
-      let suffix;
-      if (item.date % 10 === 1 && item.date !== 11) {
-        suffix = 'st';
-      } else if (item.date % 10 === 2 && item.date !== 12) {
-        suffix = 'nd';
-      } else if (item.date % 10 === 3 && item.date !== 13) {
-        suffix = 'rd';
-      } else {
-        suffix = 'th';
-      }
-      if (item.date === i) {
-        // calendarInfo.push(`
-        //     <div class="cal__item ${item.type}">${item.name}</div>
-        //   `);
-        calendarInfo.push(
-          `<p class="cal__events--date">${
-            item.date
-          }${suffix}</p><p class="cal__events--name ${item.type}">${
-            item.name
-          }</p>`
-        );
-      }
-    });
-
-    calendarInfo.push(`</div>`);
   }
+
+  const sortedFinalData = finalData.sort((a, b) => {
+    let dateA = a.date;
+    let dateB = b.date;
+    if (dateA < dateB) {
+      return -1;
+    }
+    if (dateA > dateB) {
+      return 1;
+    }
+    return 0;
+  });
+
+  sortedFinalData.forEach(item => {
+    let suffix;
+    if (item.date % 10 === 1 && item.date !== 11) {
+      suffix = 'st';
+    } else if (item.date % 10 === 2 && item.date !== 12) {
+      suffix = 'nd';
+    } else if (item.date % 10 === 3 && item.date !== 13) {
+      suffix = 'rd';
+    } else {
+      suffix = 'th';
+    }
+
+    calendarInfo.push(
+      `<p class="cal__events--date">${
+        item.date
+      }${suffix}</p><p class="cal__events--name ${item.type}">${item.name}</p>`
+    );
+  });
+
+  calendarInfo.push(`</div>`);
 
   // Render calendar
   calendarGrid.innerHTML = calendar.join('');
@@ -856,12 +848,13 @@ function renderMonth(change) {
 
   // if year/month/date matches then change current date background in calendar grid
   // need to give each grid date block a unique id
+  const calBlocks = document.querySelectorAll('.cal__block');
+
   if (
     dateFns.getYear(new Date()) === currentYear &&
     dateFns.getMonth(new Date()) === currentMonth
   ) {
-    console.log('yay');
-    console.log(calBlocks);
+    calBlocks.item(dateFns.getDate(new Date()) - 1).classList.add('today');
   }
 }
 
