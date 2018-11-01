@@ -4,8 +4,30 @@ const calendarTitle = document.querySelector('.cal__title');
 const calendarGrid = document.querySelector('.cal__grid');
 const leftBtn = document.querySelector('.cal__btn--left');
 const rightBtn = document.querySelector('.cal__btn--right');
-const calendarMobile = document.querySelector('.cal__mobile');
-const calendarEmpty = document.querySelector('.cal__empty');
+const calendarEvents = document.querySelector('.cal__events');
+const actions = document.querySelectorAll('.cal__btn');
+const calBlocks = document.querySelectorAll('.cal__block');
+
+actions.forEach(action => {
+  action.addEventListener('touchstart', e => {
+    action.classList.add('hover');
+    e.preventDefault();
+  });
+  action.addEventListener('touchend', () => {
+    action.classList.remove('hover');
+    if (action.classList.contains('cal__btn--left')) {
+      renderMonth(-1);
+    } else if (action.classList.contains('cal__btn--right')) {
+      renderMonth(1);
+    }
+  });
+  action.addEventListener('mouseover', () => {
+    action.classList.add('hover');
+  });
+  action.addEventListener('mouseout', () => {
+    action.classList.remove('hover');
+  });
+});
 
 leftBtn.addEventListener('click', () => {
   renderMonth(-1);
@@ -148,16 +170,6 @@ const months = [
   'October',
   'November',
   'December',
-];
-
-const days = [
-  'Sunday',
-  'Monday',
-  'Tuesday',
-  'Wednesday',
-  'Thursday',
-  'Friday',
-  'Saturday',
 ];
 
 // Main Dataset (Rosh Hashanah, Yom Kippur, Easter & Good Friday are only good thru 2020 dates)
@@ -687,8 +699,8 @@ function renderMonth(change) {
   const firstDayNum = dateFns.getDay(firstDay);
 
   // Empty arrays to push calendar data into
+  let calendar = [];
   let calendarInfo = [];
-  let calendarInfoMobile = [];
 
   // Pull out only calendar dates (excluding session dates) and put them in a separate array
   const thisMonthData = data.filter(item => item.month === currentMonth);
@@ -781,33 +793,33 @@ function renderMonth(change) {
     });
   }
 
-  // Push 1st calendar block into array with style to put it into 1st day of month
-  calendarInfo.push(
+  //Push 1st calendar block into array with style to put it into 1st day of month
+  calendar.push(
     `<div class="cal__block" style="grid-column-start: ${firstDayNum +
-      1};"><div class="cal__date">${1}</div>`
+      1};"><div class="cal__date">${1}</div></div>`
   );
 
   // Check if any calendar items in the final dataset occur on the 1st of the month
-  finalData.forEach(item => {
-    if (item.date === 1) {
-      calendarInfo.push(
-        `<div class="cal__item ${item.type}">${item.name}</div>`
-      );
-      calendarInfoMobile.push(
-        `<p class="cal__mobile--date">${
-          item.date
-        }st</p><p class="cal__mobile--name ${item.type}">${item.name}</p>`
-      );
-    }
-  });
+  // finalData.forEach(item => {
+  //   // if (item.date === 1) {
+  //   //   calendarInfo.push(
+  //   //     `<div class="cal__item ${item.type}">${item.name}</div>`
+  //   //   );
+  //   calendarInfo.push(
+  //     `<p class="cal__events--date">${
+  //       item.date
+  //     }st</p><p class="cal__events--name ${item.type}">${item.name}</p>`
+  //   );
+  //   // }
+  // });
 
   // Close div tag of 1st day of month
-  calendarInfo.push(`</div>`);
+  // calendarInfo.push(`</div>`);
 
   // Populate the rest of month's dates
   for (var i = 2; i < monthDays + 1; i++) {
-    calendarInfo.push(
-      `<div class="cal__block"><div class="cal__date">${i}</div>`
+    calendar.push(
+      `<div class="cal__block"><div class="cal__date">${i}</div></div>`
     );
 
     finalData.forEach(item => {
@@ -822,13 +834,13 @@ function renderMonth(change) {
         suffix = 'th';
       }
       if (item.date === i) {
-        calendarInfo.push(`
-            <div class="cal__item ${item.type}">${item.name}</div>
-          `);
-        calendarInfoMobile.push(
-          `<p class="cal__mobile--date">${
+        // calendarInfo.push(`
+        //     <div class="cal__item ${item.type}">${item.name}</div>
+        //   `);
+        calendarInfo.push(
+          `<p class="cal__events--date">${
             item.date
-          }${suffix}</p><p class="cal__mobile--name ${item.type}">${
+          }${suffix}</p><p class="cal__events--name ${item.type}">${
             item.name
           }</p>`
         );
@@ -839,8 +851,18 @@ function renderMonth(change) {
   }
 
   // Render calendar
-  calendarGrid.innerHTML = calendarInfo.join('');
-  calendarMobile.innerHTML = calendarInfoMobile.join('');
+  calendarGrid.innerHTML = calendar.join('');
+  calendarEvents.innerHTML = calendarInfo.join('');
+
+  // if year/month/date matches then change current date background in calendar grid
+  // need to give each grid date block a unique id
+  if (
+    dateFns.getYear(new Date()) === currentYear &&
+    dateFns.getMonth(new Date()) === currentMonth
+  ) {
+    console.log('yay');
+    console.log(calBlocks);
+  }
 }
 
 // Initial calendar render
