@@ -1,7 +1,7 @@
 {
-  "name": "gulp-framework",
+  "name": "txlege-countdown",
   "version": "1.0.0",
-  "description": "Simple Gulp Framework with Sass",
+  "description": "Texas Legislature session countdown clock and calendar",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
@@ -10,7 +10,7 @@
   "author": "Dan Buda",
   "repository": {
     "type": "git",
-    "url": "https://github.com/danbuda11/gulp-framework"
+    "url": "https://github.com/danbuda11/session-countdown"
   },
   "license": "ISC",
   "browserslist": [
