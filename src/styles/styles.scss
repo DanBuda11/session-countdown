@@ -1,18 +1,8 @@
-// Set color variables
 $white: #FFF;
 $dark-blue: #021128;
 $red: #f31431;
 $black: #222;
 $blue: #3E47EF;
-
-// Fix :hover issues on mobile for button transitions
-// @mixin hover-supported {
-//   @media not all and (pointer: coarse) {
-//     &:hover {
-//       @content;
-//     }
-//   }
-// }
 
 html {
   box-sizing: border-box;
@@ -60,7 +50,7 @@ header {
       align-self: center;
       font-size: 24px;
 
-      @media (min-width: 430px) {
+      @media (min-width: 445px) {
         font-size: 2em;
       }
     }
@@ -83,13 +73,13 @@ header {
 .clock {
   margin: 2em auto;
 
-  .clock__message {
+  #clock__message {
     font-size: 25px;
     margin: 0;
     font-weight: bold;
   }
 
-  .clock__time {      
+  #clock__time {      
     display: -ms-grid;  
     display: grid;
     -ms-grid-columns: 50px 50px 50px 50px 50px 50px 50px;
@@ -97,7 +87,7 @@ header {
     grid-template-columns: repeat(7, minmax(20px, 100px));
     justify-items: center;  
     list-style: none;
-    margin: 0.7em auto;
+    margin: 0.7em auto 0;
     padding: 0;
     width: 80%;
     max-width: 500px;
@@ -218,12 +208,6 @@ header {
       background-color: $white;
       color: $dark-blue;
       transition: all 0.2s ease;
-
-      // @include hover-supported {
-      //   background-color: $dark-blue;
-      //   color: $white;
-      //   transform: scale(1.1);
-      // }   
     }
 
     .cal__btn.hover {
@@ -231,13 +215,8 @@ header {
         color: $white;
         transform: scale(1.1);
     }
-    // .cal__btn:hover {
-    //     background-color: $dark-blue;
-    //     color: $white;
-    //     transform: scale(1.1);
-    // }
 
-    .cal__title {
+    #cal__title {
       margin: 0;
       align-self: center;
       font-weight: bold;
@@ -257,7 +236,7 @@ header {
     .cal__wrap--grid {
       @media (min-width: 625px) {
         width: 50%;
-        margin-right: 0.5em;
+        margin-left: 0.8em;
       }
 
       .cal__days {
@@ -267,21 +246,13 @@ header {
         width: 90%;
         max-width: 1000px;
         margin: 2em auto 0.5em;
-
-        // @media (min-width: 740px) {
-        //   display: grid;
-        // }
-
-        .cal__day {
-          
-
-         
-        }
-
         
+        @media (min-width: 625px) {
+          margin: 2em 0 0.5em;
+        }
       }
 
-      .cal__grid {
+      #cal__grid {
         display: grid;
         grid-template-columns: repeat(7, 1fr);
         grid-auto-rows: 1fr;
@@ -289,15 +260,14 @@ header {
         max-width: 1000px;
         margin: 0 auto;
 
-        // @media (min-width: 740px) {
-        //   display: grid;
-        // }
+        @media (min-width: 625px) {
+          margin: 0;
+        }
 
         .cal__block {
           border: 1px solid $black;
           margin-left: -1px;
           margin-bottom: -1px;
-          // min-height: 80px;
           padding: 5px;
           height: 45px;
 
@@ -316,17 +286,6 @@ header {
           .cal__date {
             text-align: right;
           }
-
-          // .cal__item {
-          //   text-align: left;
-          //   font-size: 12px;
-          //   line-height: 1.35;
-          //   margin-bottom: 1em;
-
-          //   @media (min-width: 1075px) {
-          //     font-size: 14px;
-          //   }
-          // }
         }
 
         .today {
@@ -336,37 +295,36 @@ header {
       }
     }
 
-    .cal__events {
+    #cal__events {
       display: grid;
       grid-template-columns: 13% auto;
       width: 85%;
       margin: 2em auto 0;
-      grid-gap: 7px;
-      justify-items: start;
+      grid-gap: 10px;
 
       @media (min-width: 625px) {
         width: 50%;
-        margin-left: 0.5em;
-        align-self: flex-start;
-        grid-gap: 15px;
       }
-      // @media (min-width: 740px) {
-      //   display: none;
-      // }  
+
+      @media (min-width: 900px) {
+        align-content: start;
+      }
       
       .cal__events--date {
         font-weight: bold;
         font-size: 15px;
-        line-height: 1.35;
-        // text-align: left;
-        // align-self: center start;
+        line-height: 1.5;
+        text-align: left;
+
+        @media (min-width: 625px) {
+          text-align: right;
+        }
       }
 
       .cal__events--name {
-        line-height: 1.35;
+        line-height: 1.5;
         font-size: 15px;
         text-align: left;
-        // align-self: start start;
       }  
     }
   }

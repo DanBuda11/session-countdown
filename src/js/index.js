@@ -1,11 +1,11 @@
-const clockMessage = document.querySelector('.clock__message');
-const time = document.querySelector('.clock__time');
-const calendarTitle = document.querySelector('.cal__title');
-const calendarGrid = document.querySelector('.cal__grid');
-const leftBtn = document.querySelector('.cal__btn--left');
-const rightBtn = document.querySelector('.cal__btn--right');
-const calendarEvents = document.querySelector('.cal__events');
+const clockMessage = document.getElementById('clock__message');
+const time = document.getElementById('clock__time');
+const leftBtn = document.getElementById('cal__btn--left');
+const calendarTitle = document.getElementById('cal__title');
+const rightBtn = document.getElementById('cal__btn--right');
 const actions = document.querySelectorAll('.cal__btn');
+const calendarGrid = document.getElementById('cal__grid');
+const calendarEvents = document.getElementById('cal__events');
 
 // Workaround to deal with mobile :hover issues
 actions.forEach(action => {
@@ -123,9 +123,9 @@ function countdown() {
   );
 
   if (duringSession === true) {
-    clockMessage.innerText = `YOUR LIFE RESUMES IN:`;
+    clockMessage.innerText = `SINE DIE ARRIVES IN:`;
   } else {
-    clockMessage.innerText = `YOUR LIFE ENDS IN:`;
+    clockMessage.innerText = `SESSION BEGINS IN:`;
   }
 
   time.innerHTML = `
@@ -847,9 +847,7 @@ function renderMonth(change) {
   calendarEvents.innerHTML = calendarInfo.join('');
 
   // if year/month/date matches then change current date background in calendar grid
-  // need to give each grid date block a unique id
   const calBlocks = document.querySelectorAll('.cal__block');
-
   if (
     dateFns.getYear(new Date()) === currentYear &&
     dateFns.getMonth(new Date()) === currentMonth
