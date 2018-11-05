@@ -12,5 +12,4 @@ Personally, this was a great project to practice using design tools such as use 
 - `date-fns` JavaScript library for date & time calculations
 - Sass (SCSS)
 - Vanilla JavaScript
-- Use of `-ms-grid` to make the site work on older Edge browser versions (the state's only a few versions behind...)
 - Custom JavaScript workaround for issues with `:hover` on mobile devices
