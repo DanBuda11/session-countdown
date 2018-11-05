@@ -16,6 +16,8 @@ const uglify = require('gulp-uglify');
 const imagemin = require('gulp-imagemin');
 // Only deal with files that have changed since the last run
 const changed = require('gulp-changed');
+const gzip = require('gulp-gzip');
+const size = require('gulp-size');
 
 // *** FILE TASKS
 
@@ -63,6 +65,11 @@ gulp.task('js', function() {
         })
       )
       .pipe(uglify())
+      .pipe(
+        size({
+          showFiles: true,
+        })
+      )
       .pipe(gulp.dest('dist/js'))
       // Hot reloading for browser-sync
       .pipe(browserSync.stream())
