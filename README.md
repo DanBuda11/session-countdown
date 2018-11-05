@@ -2,9 +2,9 @@
 
 # Texas Legislature Session Countdown Clock and Calendar
 
-This project was done for several professional and personal reasons. Professionally, as a staff in the Texas Legislature, I wanted to have a quick reference to all of the deadlines during a legislative session, as well as a reminder of when session is about to rear its ugly head and how much time before it's all over.
+This project was done for several professional and personal reasons. Professionally, as a staffer in the Texas Legislature, I wanted to have a quick reference to all of the deadlines during a legislative session, as well as a reminder of when session is about to rear its ugly head and how much time before it's all over.
 
-Personally, this was a great project to practice using design tools such as use of whitespace, flexbox and CSS grid, CSS transitions and gradients. It also gave me a chance to (quite heavily) use the `date-fns` library to help with all of the date-time calculations needed to make this all work.
+Personally, this was a great project to practice using design tools such as use of white space, flexbox and CSS grid, CSS transitions and gradients. It also gave me a chance to (quite heavily) use the `date-fns` library to help with all of the date-time calculations needed to make this all work.
 
 ### Built With
 
