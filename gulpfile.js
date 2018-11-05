@@ -25,6 +25,11 @@ gulp.task('root', function() {
   return gulp
     .src('src/*.{html,ico,png,xml,svg,webmanifest}')
     .pipe(changed('dist'))
+    .pipe(
+      size({
+        showFiles: true,
+      })
+    )
     .pipe(gulp.dest('dist'))
     .pipe(browserSync.stream());
 });
@@ -45,6 +50,11 @@ gulp.task('styles', function() {
       )
       // minify CSS
       .pipe(cleanCSS({}))
+      .pipe(
+        size({
+          showFiles: true,
+        })
+      )
       // Send compiled CSS to dist folder
       .pipe(gulp.dest('dist/styles'))
       // Hot reloading for browser-sync
@@ -81,6 +91,11 @@ gulp.task('images', function() {
     .src('src/images/*.{png,gif,jpg,jpeg}')
     .pipe(changed('dist/images'))
     .pipe(imagemin())
+    .pipe(
+      size({
+        showFiles: true,
+      })
+    )
     .pipe(gulp.dest('dist/images'));
 });
 
