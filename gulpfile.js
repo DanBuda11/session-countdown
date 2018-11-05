@@ -16,7 +16,6 @@ const uglify = require('gulp-uglify');
 const imagemin = require('gulp-imagemin');
 // Only deal with files that have changed since the last run
 const changed = require('gulp-changed');
-const gzip = require('gulp-gzip');
 const size = require('gulp-size');
 
 // *** FILE TASKS
