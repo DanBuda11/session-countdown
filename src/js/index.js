@@ -342,7 +342,7 @@ const data = [
     date: 27,
   },
   {
-    name: '1st day a senator may place 5 bills on the Intent Calendar',
+    name: 'First day a senator may place 5 bills on the Intent Calendar',
     type: 'legislative',
     dateType: 'static',
     month: 3,
@@ -382,7 +382,7 @@ const data = [
     },
   },
   {
-    name: 'First Day legislators may file bills for the legislative session',
+    name: 'First day legislators may file bills for the legislative session',
     type: 'legislative',
     dateType: 'firstDay',
     month: 10,
@@ -512,7 +512,7 @@ const data = [
     },
   },
   {
-    name: 'Daylight Savings Time Starts',
+    name: 'Daylight Saving Time Starts',
     type: 'holiday',
     dateType: 'flex',
     month: 2,
@@ -522,7 +522,7 @@ const data = [
     },
   },
   {
-    name: 'Daylight Savings Time Ends',
+    name: 'Daylight Saving Time Ends',
     type: 'holiday',
     dateType: 'flex',
     month: 10,
@@ -545,7 +545,7 @@ const sessionData = [
     sessionDay: 140,
   },
   {
-    name: 'Legislature convenes',
+    name: 'Legislature convenes at noon',
     sessionDay: 1,
   },
   {
@@ -554,12 +554,12 @@ const sessionData = [
   },
   {
     name:
-      'Deadline for the house to distribute its last House Daily Calendar with house bills and house JRs',
+      'Deadline for the house to distribute last House Daily Calendar with house bills and house JRs',
     sessionDay: 120,
   },
   {
     name:
-      'Deadline for the house to distribute its last House Local & Consent Calendar with consent house bills',
+      'Deadline for the house to distribute last House Local & Consent Calendar with consent house bills',
     sessionDay: 121,
   },
   {
@@ -574,7 +574,7 @@ const sessionData = [
   },
   {
     name:
-      'Deadline for house to distribute its last House Local & Consent Calendar with local house bills',
+      'Deadline for house to distribute last House Local & Consent Calendar with local house bills',
     sessionDay: 128,
   },
   {
@@ -593,12 +593,12 @@ const sessionData = [
   },
   {
     name:
-      'Deadline for the house to distribute its last House Daily Calendar with senate bills and senate JRs',
+      'Deadline for the house to distribute last House Daily Calendar with senate bills and senate JRs',
     sessionDay: 132,
   },
   {
     name:
-      'Deadline for the house to distribute its last House Local & Consent Calendar with senate bills',
+      'Deadline for the house to distribute last House Local & Consent Calendar with senate bills',
     sessionDay: 133,
   },
   {
