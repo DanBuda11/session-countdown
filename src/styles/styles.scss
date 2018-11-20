@@ -237,6 +237,26 @@ header {
           .cal__date {
             text-align: right;
           }
+
+          .cal__dots {
+            display: flex;
+            
+            .cal__dot {
+
+            }
+
+            .cal__dot--legislative {
+              color: $black;
+            }
+
+            .cal__dot--holiday {
+              color: $blue;
+            }
+
+            .cal__dot--other {
+              color: $red;
+            }
+          }
         }
 
         .today {

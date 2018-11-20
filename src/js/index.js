@@ -803,16 +803,57 @@ function renderMonth(change) {
     });
   }
 
+  function addDots(num) {
+    let dots = {
+      holiday: 0,
+      legislative: 0,
+      other: 0,
+    };
+
+    let dotsHtml = [];
+
+    // Iterate over the month's data set. If an event in the data set matches the date being checked against, increase the object key/value for the type of date it is. Then render out different colored dots if any of the key values are > 0
+    finalData.forEach(event => {
+      if (event.date === num) {
+        if (event.type === 'holiday') {
+          dots.holiday = dots.holiday + 1;
+        } else if (event.type === 'legislative') {
+          dots.legislative = dots.legislative + 1;
+        } else {
+          dots.other = dots.other + 1;
+        }
+      }
+    });
+
+    if (dots.legislative > 0) {
+      dotsHtml.push(
+        '<div class="cal__dot cal__dot--legislative">&#9679;</div>'
+      );
+    }
+    if (dots.holiday > 0) {
+      dotsHtml.push('<div class="cal__dot cal__dot--holiday">&#9679;</div>');
+    }
+    if (dots.other > 0) {
+      dotsHtml.push('<div class="cal__dot cal__dot--other">&#9679;</div>');
+    }
+
+    return dotsHtml.join('');
+  }
+
   //Push 1st calendar block into array with style to put it into 1st day of month
   calendar.push(
     `<div class="cal__block" style="grid-column-start: ${firstDayNum +
-      1};"><div class="cal__date">${1}</div></div>`
+      1};"><div class="cal__date">${1}</div><div class="cal__dots">${addDots(
+      1
+    )}</div></div>`
   );
 
   // Populate the rest of month's dates
   for (var i = 2; i < monthDays + 1; i++) {
     calendar.push(
-      `<div class="cal__block"><div class="cal__date">${i}</div></div>`
+      `<div class="cal__block"><div class="cal__date">${i}</div><div class="cal__dots">${addDots(
+        i
+      )}</div></div>`
     );
   }
 
