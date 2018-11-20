@@ -57,6 +57,8 @@ function countdown() {
   // Now means now
   const now = new Date();
   let end;
+  // Store the value of the current or upcoming Legislature (85th, 86th)
+  let legislature = Math.floor((currentYear - 1846) / 2);
 
   // Set the first day of a legislative session
   function getDate(year) {
@@ -74,6 +76,8 @@ function countdown() {
     getDate(sessionYear);
     // Countdown ends when session starts
     end = sessionStartDate;
+    sineDieDate = dateFns.addDays(sessionStartDate, 139);
+    sineDieDate = dateFns.subHours(sineDieDate, 12);
     duringSession = false;
   } else {
     // Odd year
@@ -101,6 +105,7 @@ function countdown() {
       getDate(nextSessionYear);
       end = sessionStartDate;
       duringSession = false;
+      legislature++;
     }
   }
 
@@ -123,14 +128,16 @@ function countdown() {
   );
 
   if (duringSession === true) {
-    clockMessage.innerText = `SINE DIE ARRIVES IN:`;
+    clockMessage.innerText = `THE ${legislature}TH LEGISLATURE SINE DIES IN:`;
   } else {
-    clockMessage.innerText = `SESSION BEGINS IN:`;
+    clockMessage.innerText = `THE ${legislature}TH LEGISLATURE CONVENES IN:`;
   }
 
   time.innerHTML = `
     <li class="clock__time--number">${daysLeft}</li>
-    <li class="clock__time--number">:</li>
+    <li class="clock__time--number ${
+      daysLeft >= 100 ? 'clock__time--firstcolon' : ''
+    }">:</li>
     <li class="clock__time--number">${
       hoursLeft < 10 ? '0' : ''
     }${hoursLeft}</li>
