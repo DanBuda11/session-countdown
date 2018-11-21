@@ -1,81 +1,147 @@
 <!DOCTYPE html>
 <html lang="en">
+  <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <meta charset="UTF-8" />
+    <meta
+      name="description"
+      content="Texas Legislature realtime session countdown clock and legislative calendar."
+    />
+    <link
+      rel="apple-touch-icon"
+      sizes="180x180"
+      href="/apple-touch-icon.png?v=qABgeAY58A"
+    />
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="32x32"
+      href="/favicon-32x32.png?v=qABgeAY58A"
+    />
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="16x16"
+      href="/favicon-16x16.png?v=qABgeAY58A"
+    />
+    <link rel="manifest" href="/site.webmanifest?v=qABgeAY58A" />
+    <link
+      rel="mask-icon"
+      href="/safari-pinned-tab.svg?v=qABgeAY58A"
+      color="#5bbad5"
+    />
+    <link rel="shortcut icon" href="/favicon.ico?v=qABgeAY58A" />
+    <meta name="msapplication-TileColor" content="#da532c" />
+    <meta name="theme-color" content="#ffffff" />
+    <meta property="og:title" content="Texas Legislature Session Countdown" />
+    <meta property="og:type" content="website" />
+    <meta
+      property="og:description"
+      content="Texas Legislature realtime session countdown clock and legislative calendar."
+    />
+    <meta
+      property="og:image"
+      content="https://txlege-countdown.netlify.com/images/capitol.jpg"
+    />
+    <meta property="og:url" content="https://txlege-countdown.netlify.com/" />
+    <title>Texas Legislature Session Countdown</title>
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.0/normalize.min.css"
+    />
+    <link
+      href="https://fonts.googleapis.com/css?family=Roboto|Roboto+Mono:700"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://use.fontawesome.com/releases/v5.4.1/css/all.css"
+      integrity="sha384-5sAR7xN1Nv6T6+dT2mhtzEpVJvfS3NScPQTrOxhwjIuvcA67KV2R5Jz6kr4abQsz"
+      crossorigin="anonymous"
+    />
+    <link rel="stylesheet" type="text/css" href="styles/styles.css" />
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script
+      async
+      src="https://www.googletagmanager.com/gtag/js?id=UA-71553810-2"
+    ></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag() {
+        dataLayer.push(arguments);
+      }
+      gtag('js', new Date());
+      gtag('config', 'UA-71553810-2');
+    </script>
+  </head>
 
-<head>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta http-equiv="X-UA-Compatible" content="ie=edge">
-  <meta charset="UTF-8">
-  <meta name="description" content="Texas Legislature realtime session countdown clock and legislative calendar.">
-  <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png?v=qABgeAY58A">
-  <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png?v=qABgeAY58A">
-  <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png?v=qABgeAY58A">
-  <link rel="manifest" href="/site.webmanifest?v=qABgeAY58A">
-  <link rel="mask-icon" href="/safari-pinned-tab.svg?v=qABgeAY58A" color="#5bbad5">
-  <link rel="shortcut icon" href="/favicon.ico?v=qABgeAY58A">
-  <meta name="msapplication-TileColor" content="#da532c">
-  <meta name="theme-color" content="#ffffff">
-  <meta property="og:title" content="Texas Legislature Session Countdown">
-  <meta property="og:type" content="website">
-  <meta property="og:description" content="Texas Legislature realtime session countdown clock and legislative calendar.">
-  <meta property="og:image" content="https://txlege-countdown.netlify.com/images/capitol.jpg">
-  <meta property="og:url" content="https://txlege-countdown.netlify.com/">
-  <title>Texas Legislature Session Countdown</title>
-  <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.0/normalize.min.css">
-  <link href="https://fonts.googleapis.com/css?family=Roboto|Roboto+Mono:700" rel="stylesheet">
-  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.4.1/css/all.css" integrity="sha384-5sAR7xN1Nv6T6+dT2mhtzEpVJvfS3NScPQTrOxhwjIuvcA67KV2R5Jz6kr4abQsz"
-    crossorigin="anonymous">
-  <link rel="stylesheet" type="text/css" href="styles/styles.css">
-  <!-- Global site tag (gtag.js) - Google Analytics -->
-  <script async src="https://www.googletagmanager.com/gtag/js?id=UA-71553810-2"></script>
-  <script>
-    window.dataLayer = window.dataLayer || [];
-    function gtag() { dataLayer.push(arguments); }
-    gtag('js', new Date());
-    gtag('config', 'UA-71553810-2');
-  </script>
-</head>
-
-<body>
-  <div class="wrapper">
-    <header>
-      <img src="./images/capitol.jpg" alt="Logo" class="header__logo">
-      <div class="header__text">
-        <h1 class="header__title">Texas Legislature Session Countdown</h1>
-        <p class="header__subtitle">A <a href="https://danbuda.com" class="header__link" target="_blank" rel="noopener noreferrer">Dan
-            Buda</a>
-          Joint</p>
-      </div>
-    </header>
-    <section class="clock">
-      <p id="clock__message"></p>
-      <ul id="clock__time"></ul>
-    </section>
-    <section class="cal">
-      <div class="cal__btns">
-        <button class="cal__btn cal__btn--left" aria-label="Left Button"><i class="far fa-arrow-alt-circle-left fa-3x"></i></button>
-        <p id="cal__title"></p>
-        <button class="cal__btn cal__btn--right" aria-label="Right Button"><i class=" far fa-arrow-alt-circle-right
-          fa-3x"></i></button>
-      </div>
-      <div class="cal__wrap">
-        <div class="cal__wrap--grid">
-          <div class="cal__days">
-            <div class="cal__day">Su</div>
-            <div class="cal__day">M</div>
-            <div class="cal__day">T</div>
-            <div class="cal__day">W</div>
-            <div class="cal__day">Th</div>
-            <div class="cal__day">F</div>
-            <div class="cal__day">Sa</div>
-          </div>
-          <div id="cal__grid"></div>
+  <body>
+    <div class="wrapper">
+      <header>
+        <img src="./images/capitol.jpg" alt="Logo" class="header__logo" />
+        <div class="header__text">
+          <h1 class="header__title">Texas Legislature Session Countdown</h1>
+          <p class="header__subtitle">
+            A
+            <a
+              href="https://danbuda.com"
+              class="header__link"
+              target="_blank"
+              rel="noopener noreferrer"
+              >Dan Buda</a
+            >
+            Joint
+          </p>
         </div>
-        <div id="cal__events"></div>
-      </div>
-    </section>
-  </div>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/date-fns/1.29.0/date_fns.min.js"></script>
-  <script src="js/index.js"></script>
-</body>
-
+      </header>
+      <section class="clock">
+        <p id="clock__message"></p>
+        <ul id="clock__time"></ul>
+      </section>
+      <section class="cal">
+        <div class="cal__btns">
+          <button class="cal__btn cal__btn--left" aria-label="Left Button">
+            <i class="far fa-arrow-alt-circle-left fa-3x"></i>
+          </button>
+          <p id="cal__title"></p>
+          <button class="cal__btn cal__btn--right" aria-label="Right Button">
+            <i
+              class=" far fa-arrow-alt-circle-right
+          fa-3x"
+            ></i>
+          </button>
+        </div>
+        <div class="cal__wrap">
+          <div class="cal__wrap--grid">
+            <div class="cal__days">
+              <div class="cal__day">Su</div>
+              <div class="cal__day">M</div>
+              <div class="cal__day">T</div>
+              <div class="cal__day">W</div>
+              <div class="cal__day">Th</div>
+              <div class="cal__day">F</div>
+              <div class="cal__day">Sa</div>
+            </div>
+            <div id="cal__grid"></div>
+            <div class="cal__legend">
+              <p class="cal__legend--item">
+                <span class="legislative">&#9679;</span> Legislative
+              </p>
+              <p class="cal__legend--item">
+                <span class="holiday">&#9679;</span> Holiday
+              </p>
+              <p class="cal__legend--item">
+                <span class="other">&#9679;</span> Other
+              </p>
+            </div>
+          </div>
+          <div id="cal__events"></div>
+        </div>
+      </section>
+    </div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/date-fns/1.29.0/date_fns.min.js"></script>
+    <script src="js/index.js"></script>
+  </body>
 </html>

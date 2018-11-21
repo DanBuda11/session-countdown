@@ -274,6 +274,21 @@ header {
           text-shadow: 2px 2px 0 $white, 2px -2px 0 $white, -2px 2px 0 $white, -2px -2px 0 $white, 2px 0px 0 $white, 0px 2px 0 $white, -2px 0px 0 $white, 0px -2px 0 $white;
         }
       }
+
+      .cal__legend {
+        display: flex;
+        width: 90%;
+        margin: 1em auto 0;
+        justify-content: space-evenly;
+
+        @media (min-width: 625px) {
+          margin-left: 0;
+        }
+
+        .cal__legend--item {
+          font-size: 15px;
+        }
+      }
     }
 
     #cal__events {
