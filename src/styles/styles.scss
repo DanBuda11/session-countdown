@@ -227,7 +227,7 @@ header {
           }
 
           @media (min-width: 625px) {
-            height: 40px;
+            height: 45px;
           }
 
           @media (min-width: 900px) {
@@ -242,7 +242,13 @@ header {
             display: flex;
             
             .cal__dot {
+              @media (min-width: 450px) and (max-width: 624px) {
+                font-size: 20px;
+              }
 
+              @media (min-width: 625px) and (max-width: 900px) {
+
+              }
             }
 
             .cal__dot--legislative {
@@ -262,6 +268,10 @@ header {
         .today {
           background-color: $dark-blue;
           color: $white;
+        }
+
+        .today > .cal__dots > .cal__dot {
+          text-shadow: 2px 2px 0 $white, 2px -2px 0 $white, -2px 2px 0 $white, -2px -2px 0 $white, 2px 0px 0 $white, 0px 2px 0 $white, -2px 0px 0 $white, 0px -2px 0 $white;
         }
       }
     }
