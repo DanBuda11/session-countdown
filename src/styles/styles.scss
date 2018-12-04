@@ -294,6 +294,7 @@ header {
     #cal__events {
       display: grid;
       grid-template-columns: 13% auto;
+      align-content: start;
       width: 85%;
       margin: 2em auto 0;
       grid-gap: 10px;

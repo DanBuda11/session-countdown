@@ -711,7 +711,18 @@ function renderMonth(change) {
   const thisMonthData = data.filter(item => item.month === currentMonth);
   // Calculate the dates for flex dateType items and return all non-sesion dates to a finalData array
   const finalData = thisMonthData
-    .filter(item => !item.year || item.year === currentYear)
+    .filter(function(item) {
+      if (item.dateType === 'general' || item.dateType === 'firstDay') {
+        if (currentYear % 2 === 0) {
+          return true;
+        }
+        return false;
+      } else if (!item.year || item.year === currentYear) {
+        return true;
+      } else {
+        return false;
+      }
+    })
     .map(date => {
       let newDate;
 
@@ -732,8 +743,7 @@ function renderMonth(change) {
         }
         // After matching up weekday days, next calc here
         newDate = 1 + (date.date.nth - 1) * 7 + counter;
-        // Only include general election if it's the correct year
-      } else if (date.dateType === 'general' && currentYear % 2 === 0) {
+      } else if (date.dateType === 'general') {
         let monthStart = dateFns.startOfMonth(
           new Date(currentYear, date.month)
         );
@@ -742,7 +752,7 @@ function renderMonth(change) {
         }
         monthStart = dateFns.addDays(monthStart, 1);
         newDate = dateFns.getDate(new Date(monthStart));
-      } else if (date.dateType === 'firstDay' && currentYear % 2 === 0) {
+      } else if (date.dateType === 'firstDay') {
         let monthStart = dateFns.startOfMonth(
           new Date(currentYear, date.month)
         );
@@ -751,6 +761,8 @@ function renderMonth(change) {
         }
         monthStart = dateFns.addDays(monthStart, 7);
         newDate = dateFns.getDate(new Date(monthStart));
+      } else if (date.dateType === 'general' || date.dateType === 'firstDay') {
+        return;
       } else if (date.dateType === 'memorial') {
         let monthEnd = dateFns.endOfMonth(new Date(currentYear, date.month));
         while (!dateFns.isMonday(monthEnd)) {
