@@ -362,6 +362,16 @@ const data = [
     month: 10,
   },
   {
+    name: "Governor's Inauguration",
+    type: 'legislative',
+    dateType: 'inauguration',
+    month: 0,
+    date: {
+      nth: 3,
+      weekday: 2,
+    },
+  },
+  {
     name: 'Cinco de Mayo',
     type: 'holiday',
     dateType: 'static',
@@ -712,7 +722,12 @@ function renderMonth(change) {
   // Calculate the dates for flex dateType items and return all non-sesion dates to a finalData array
   const finalData = thisMonthData
     .filter(function(item) {
-      if (item.dateType === 'general' || item.dateType === 'firstDay') {
+      if (item.dateType === 'inauguration') {
+        if ((currentYear - 3) % 4 === 0) {
+          return true;
+        }
+        return false;
+      } else if (item.dateType === 'general' || item.dateType === 'firstDay') {
         if (currentYear % 2 === 0) {
           return true;
         }
@@ -726,7 +741,7 @@ function renderMonth(change) {
     .map(date => {
       let newDate;
 
-      if (date.dateType === 'flex') {
+      if (date.dateType === 'flex' || date.dateType === 'inauguration') {
         // Is item's date.weekday the first day of the month?
         // If so, start the next calculation
         // If not, keep adding 1 until they match up
@@ -761,8 +776,6 @@ function renderMonth(change) {
         }
         monthStart = dateFns.addDays(monthStart, 7);
         newDate = dateFns.getDate(new Date(monthStart));
-      } else if (date.dateType === 'general' || date.dateType === 'firstDay') {
-        return;
       } else if (date.dateType === 'memorial') {
         let monthEnd = dateFns.endOfMonth(new Date(currentYear, date.month));
         while (!dateFns.isMonday(monthEnd)) {
