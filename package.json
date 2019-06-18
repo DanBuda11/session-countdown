@@ -19,10 +19,10 @@
     "not dead"
   ],
   "devDependencies": {
-    "@babel/core": "^7.2.2",
-    "@babel/preset-env": "^7.2.3",
-    "autoprefixer": "^9.4.5",
-    "browser-sync": "^2.26.3",
+    "@babel/core": "^7.4.5",
+    "@babel/preset-env": "^7.4.5",
+    "autoprefixer": "^9.6.0",
+    "browser-sync": "^2.26.7",
     "gulp": "^3.9.1",
     "gulp-babel": "^8.0.0",
     "gulp-changed": "^3.2.0",
@@ -31,8 +31,8 @@
     "gulp-postcss": "^8.0.0",
     "gulp-sass": "^4.0.2",
     "gulp-size": "^3.0.0",
-    "gulp-uglify": "^3.0.1",
-    "postcss": "^7.0.13"
+    "gulp-uglify": "^3.0.2",
+    "postcss": "^7.0.17"
   },
   "dependencies": {}
 }
