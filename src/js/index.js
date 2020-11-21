@@ -505,13 +505,6 @@ const data = [
     date: 31,
   },
   {
-    name: "Dan Buda's Wife's Birthday",
-    type: 'other',
-    dateType: 'static',
-    month: 6,
-    date: 13,
-  },
-  {
     name: "New Year's Eve",
     type: 'holiday',
     dateType: 'static',
