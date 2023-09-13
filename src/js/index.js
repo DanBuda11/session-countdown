@@ -725,6 +725,11 @@ function renderMonth(change) {
           return true;
         }
         return false;
+      } else if (item.type === 'legislative' && item.dateType === 'static') {
+        if (currentYear % 2 === 0) {
+          return false;
+        }
+        return true;
       } else if (!item.year || item.year === currentYear) {
         return true;
       } else {
